@@ -1,0 +1,5 @@
+title: test
+category: testing
+date: 2007-01-01
+
+the main test.
