@@ -1,3 +1,33 @@
+title: Ahyane
+tags: ahyane
+
+So, having to manage content in a folder structure, like I suggested below.  That sucks.  Fuck that.
+
+New plan: the metadata on a piece of content is what determines where it goes.  Organize the content folder however you like, so long as the metadata is good.
+
+If it has a date, it gets put in the dated archives.
+If it has tags, it gets put in the category archives.
+If it has an author, it gets put in the author archives
+
+Type values:
+static - a static (non-dated) page, akin to Wordpress's "pages". default if no date on the thing
+draft - not published
+blog - a blog post in the date archives (default if there's a date on the thing.)
+
+url-titles:
+If the thing has a "stub" metadata, use that.  Otherwise, use the sanitized title.
+
+Permalinks: 
+If the thing has a date, then the canonical link is: /yyyy/dd/url-title/
+If it doesn't have a date, or if the "type" is "static", then the permalink is /url-title/
+
+
+
+
+
+-=-=-=-=- -=-=-=-=- -=-=-=-=- -=-=-=-=- -=-=-=-=- -=-=-=-=- 
+
+
 Foohack CMS
 
 the problem is, it doesn't make sense to organize content in quite the same way as the url schema.  Or does it, at least for the "normal" year/month folders?
@@ -7,17 +37,6 @@ content/2008/07/blah-blah-blah.txt maybe?
 and then also, a content/drafts/ folder for stuff that isn't published yet.  The "publish" mechanism is to move the content file into the year/month folders.
 
 So, that means I can take a few shortcuts.  All nodes with a path matching /[0-9]{4}/[0-9]{2}/ can be considered blog posts.  Anything else is a static page.
-
-
-
-
-
-
-
-
-
-
-
 
 
 -=-=-=-=- -=-=-=-=- -=-=-=-=- -=-=-=-=- -=-=-=-=- -=-=-=-=- -=-=-=-=-
