@@ -14,14 +14,7 @@ These are "simple" because, for each one, they just perform some operation on th
 	1. markdown transform — Forget all the others.  Textmate has incredibly good markdown support out of the box, and I like it.  Markdown wins.
 	2. excerpts — I'm thinking to just support the b2-style `<!--more-->`. It's worked well so far.  But it should also Just Work when you don't have that, pulling out hte first paragraph or 50 words or whatever.  Also, I'm thinking an explicit mechanism of defining an excerpt would be useful.
 	3. Post pagination?  Worth the effort?  b2, and thus Wordpress and b2evo, support `<!--nextpage-->` to break a single post up into pages.  I *never* use this feature.  Decision: Skip it.  If there's demand, it wouldn't be too hard, but not worth the bugginess of having extra transforms.
-
-## Slightly less simple treewalkers
-
-These aren't really clear in my mind at this time.  Need to think some more on them.
-
-1. Get comments from Disqus
-2. Submit post to digg/hackernews/reddit/buzz/??
-3. Walk over the parsed content pushing the node objects through the template to turn each URL into a full page.  This needs thinking.
+	4. Walk over the parsed content pushing the node objects through the template to turn each URL into a full page.  This needs thinking.
 
 ## Transforms that are currently impossible (tree-surgery, not just node mutation)
 
@@ -82,7 +75,13 @@ In all of these, some metadata should be appended to the created nodes to specif
 		}
 	}`
 
-	
+## Phase 2
+
+1. Import from Wordpress
+2. Stuff to ping hackernews/digg/buzz/reddit/etc.
+3. Integrate with Disqus
+4. ...
+5. Profit!
 
 
 
