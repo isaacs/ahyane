@@ -54,6 +54,7 @@ class Builder {
 	}
 	private static function full () {
 		Builder::make(array(
+			'remove',
 			'read',
 			'urlify',
 			'write',
@@ -61,12 +62,10 @@ class Builder {
 		));
 	}
 	private static function urlify () {
-		TW_ResolveNaive::walk(self::$htdocs);
-		// TW_TransformSite::walk(self::$htdocs);
 		TW_ParseContent::walk(self::$htdocs);
 
 		// do stuff with the parsed content...
-
+		
 		TW_UnParseContent::walk(self::$htdocs);
 		TW_AddIndexFile::walk(self::$htdocs);
 		
