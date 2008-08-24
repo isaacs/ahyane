@@ -1,0 +1,94 @@
+title: Todo
+tags: ahyane
+type: static
+
+## Simple Treewalkers
+
+These are "simple" because, for each one, they just perform some operation on the contents or the metadata, and nothing else.
+
+1. Treewalkers that basically must succeed for the build to work Should they modify the contents to "fix" any problems, or just bork out and die on any errors? Not sure.
+	1. read titles (default to "untitled entry" or some such?)
+	2. create url-stub data from title (ensure uniqueness)
+	
+2. Treewalkers that just do stuff to each node, but don't have to be too picky.
+	1. markdown transform — Forget all the others.  Textmate has incredibly good markdown support out of the box, and I like it.  Markdown wins.
+	2. excerpts — I'm thinking to just support the b2-style `<!--more-->`. It's worked well so far.  But it should also Just Work when you don't have that, pulling out hte first paragraph or 50 words or whatever.  Also, I'm thinking an explicit mechanism of defining an excerpt would be useful.
+	3. Post pagination?  Worth the effort?  b2, and thus Wordpress and b2evo, support `<!--nextpage-->` to break a single post up into pages.  I *never* use this feature.  Decision: Skip it.  If there's demand, it wouldn't be too hard, but not worth the bugginess of having extra transforms.
+
+## Slightly less simple treewalkers
+
+These aren't really clear in my mind at this time.  Need to think some more on them.
+
+1. Get comments from Disqus
+2. Submit post to digg/hackernews/reddit/buzz/??
+3. Walk over the parsed content pushing the node objects through the template to turn each URL into a full page.  This needs thinking.
+
+## Transforms that are currently impossible (tree-surgery, not just node mutation)
+
+These are going to require that we build out a new kind of tree transformation mechanism.  These would be a lot easier if the contentnode class supported adding/modifying things by path.  Need to do that.  Then you could just build out the extra nodes for these in just a few passes.
+
+In all of these, some metadata should be appended to the created nodes to specify what kind of thing it is.  Ie, is this a dated archive, page 2, year 2008, author isaacs, etc.
+
+1. Build out the date archives — Walk over the whole tree, creating a hash table of $datetime => $node. Then, when it's done, walk through this list, and create a new node for each date block that has a list of excerpts as the content.  So, if there were posts on 2008-01-08, 2008-02-01, and 2008-02-05, you'd have this:
+	2008 : {
+		content : [excerpt, excerpt, excerpt...],
+		children : {
+			01 : {
+				content: [excerpt]
+				children : {
+					08 : {
+						content : [excerpt]
+					}
+				}
+			},
+			02 : {
+				content : [excerpt, excerpt],
+				children : {
+					01 : {
+						content : [excerpt]
+					},
+					05 : {
+						content : [excerpt]
+					}
+				}
+			}
+		}
+	}
+	When this is urlified, it'll work out so that /2008 is all the posts in 2008, /2008/01 is all the posts in january of 2008, etc.
+
+2. Tag/category — I like category, and that's what Foohack uses, but some of the kids these days like to call them tags, and I'm all for calling things by shorter names that mean the same thing.
+
+3. Any other metadata? — Author, last-modified, ??
+
+4. Pagination — For all these lists of things, if they have more than N things, then put the first N things in their content, and blow out a "page" child node that has child nodes for each page.  So, if you have something like this:
+	foo : {
+		content : [1,2,3,4,5,6,7,8,9,0]
+	}
+	that would turn into something like this:
+	foo : {
+		content : [1,2,3,4,5],
+		children : {
+			page : {
+				content : null,
+				children : {
+					1 : {
+						content : [1,2,3,4,5]
+					},
+					2 : {
+						content : [6,7,8,9,0]
+					}
+				}
+			}
+		}
+	}
+
+	
+
+
+
+
+
+
+
+
+
