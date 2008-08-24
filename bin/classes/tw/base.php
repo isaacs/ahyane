@@ -10,7 +10,7 @@ class TW_Base {
 			if (!class_exists($c)) {
 				error_log("Class doesn't exist: $c");
 			}
-			error_log("Traversing with $c over $node");
+			// error_log("Traversing with $c over $node");
 			foreach ($node->children as $child) {
 				eval("$c::walk(\$child);");
 			}

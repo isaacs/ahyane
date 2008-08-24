@@ -9,7 +9,7 @@ class TW_AddIndexFile extends TW_Base {
 			$node->child = new ContentNode('index.html');
 			$node->_('index.html')->content = $node->content;
 			$node->content = null;
-			error_log("has content: $node {$node->path}");
+			// error_log("has content: $node {$node->path}");
 			
 		}
 	}

@@ -56,16 +56,20 @@ class Builder {
 		Builder::make(array(
 			'remove',
 			'read',
+			'parse',
+			
+			// insert magic here...
+			
 			'urlify',
-			'write',
-			'display'
+			'write'
+			// ,'display' // debuggery.
 		));
 	}
-	private static function urlify () {
+	private static function parse () {
 		TW_ParseContent::walk(self::$htdocs);
-
-		// do stuff with the parsed content...
-		
+	}
+	
+	private static function urlify () {
 		TW_UnParseContent::walk(self::$htdocs);
 		TW_AddIndexFile::walk(self::$htdocs);
 		
