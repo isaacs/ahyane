@@ -21,24 +21,24 @@ class FileTree {
 	public static function read ($root) {
 		$path = realpath(dirname(__FILE__) . '/../../' . $root);
 		if (!$path) {
-			error_log("no path " . json_encode($path));
+			// error_log("no path " . json_encode($path));
 			return;
 		}
-		error_log("got path ".$path);
+		// error_log("got path ".$path);
 		$d = new ContentNode(basename($path));
 		if (!is_dir($path)) {
-			error_log("getting contents, because not a dir");
+			// error_log("getting contents, because not a dir");
 			$d->content = file_get_contents($path);
 		} else {
 			foreach (glob("$path/*") as $file) {
-				error_log("reading $root/" . basename($file));
+				// error_log("reading $root/" . basename($file));
 				$child = self::read($root . '/' . basename($file));
-				error_log("after read ". $child);
+				// error_log("after read ". $child);
 				$d->child($child);
-				error_log("after child assignment");
+				// error_log("after child assignment");
 			}
 		}
-		error_log("returning $d");
+		// error_log("returning $d");
 		return $d;
 	}
 	public static function write ($tree, $root = "") {

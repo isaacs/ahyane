@@ -145,12 +145,11 @@ class ContentNode implements Countable {
 		} elseif ($parent !== $this->parent) {
 			if ($this->parent) {
 				// moving from another location, sever ties.
-				$this->parent->remove = $this;
+				$this->parent->remove($this);
 			}
 			$this->parent = $parent;
 			$parent->child($this);
 		}
-		// $this->parent->child($this);
 		return $parent;
 	}
 	public function path () {
