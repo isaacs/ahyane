@@ -8,7 +8,6 @@ class ContentNode implements Countable {
 	public $content = null;
 
 	private $name = "";
-	private $transforms = array();
 	private $children = null;
 	private $parent = null;
 	
@@ -27,10 +26,7 @@ class ContentNode implements Countable {
 			'parent', 'data', 'json', 'path', 'length', 'count'
 		))) {
 			return $this->$k();
-		} elseif (!in_array($k, array(
-			// these are actually ungettable.
-			'transforms'
-		))) {
+		} else {
 			return $this->$k;
 		}
 	}
@@ -135,9 +131,6 @@ class ContentNode implements Countable {
 		if (array_key_exists($n, $this->children)) {
 			unset($this->children->$n);
 		}
-		if (in_array($n, $this->transforms)) {
-			unset($this->transforms[ array_search($n, $this->transforms) ]);
-		}
 		return $child;
 	}
 	public function rollCall () {
@@ -159,9 +152,6 @@ class ContentNode implements Countable {
 		}
 		// $this->parent->child($this);
 		return $parent;
-	}
-	public function addTransform ($transform) {
-		$this->transforms[] = $transform;
 	}
 	public function path () {
 		return ($this->parent ? $this->parent->path() . '/' : '') . $this->name;
