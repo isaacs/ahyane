@@ -1,3 +1,18 @@
-A CMS that works by transforming one folder structure into another.
+A CMS that works by transforming one set of files into another.
 
 Name credit: muinamir called tindómiel
+
+
+Usage:
+
+Put content files in the "content" folder.  The format is similar to an email or HTTP message, with a list of key/value headers at the top, a blank line, and then the message body (contents).
+
+Run the build.php script in the "bin" folder.  The default command is "full", but you can also specify any of the functions in the "Builder" class found in bin/classes/builder.php.
+
+
+Contribution: 
+
+Contact me if you're interested.  http://foohack.com/contact/
+
+There's plenty to do besides just writing code.
+

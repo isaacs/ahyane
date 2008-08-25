@@ -80,8 +80,9 @@ In all of these, some metadata should be appended to the created nodes to specif
 1. Import from Wordpress
 2. Stuff to ping hackernews/digg/buzz/reddit/etc.
 3. Integrate with Disqus
-4. ...
-5. Profit!
+4. Documentation – It would be good if the build command had some kind of --help or some such.
+5. Write a set of shell scripts to do stuff, and a simple OSX app to wrap around them.
+
 
 
 
