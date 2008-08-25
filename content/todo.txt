@@ -2,6 +2,11 @@ title: Todo
 tags: ahyane
 type: static
 
+These are some of the things that need to be done.  This right here is an excerpt.
+
+<!--more-->
+
+
 ## Simple Treewalkers
 
 These are "simple" because, for each one, they just perform some operation on the contents or the metadata, and nothing else.

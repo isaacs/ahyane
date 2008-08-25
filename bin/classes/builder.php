@@ -70,6 +70,7 @@ class Builder {
 	}
 	
 	private static function urlify () {
+		TW_Excerpt::walk(self::$htdocs);
 		TW_Markdown::walk(self::$htdocs);
 		TW_UnParseContent::walk(self::$htdocs);
 		TW_AddIndexFile::walk(self::$htdocs);
