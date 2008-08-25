@@ -1,6 +1,6 @@
 <?php
 
-if (defined('ahyane_LOADED')) {
+if (defined('AHYANE_LOADED')) {
 	return;
 }
 define('AHYANE_LOADED', true);
