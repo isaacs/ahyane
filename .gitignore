@@ -1,2 +1,2 @@
-cache/*.json
-htdocs/*
+*.json
+*.html
