@@ -6,8 +6,15 @@ if (defined('AHYANE_LOADED')) {
 define('AHYANE_LOADED', true);
 
 function ahyane_autoloader ($class) {
-	$filename = realpath(dirname(__FILE__) . '/classes/' . strtolower(
-		str_replace(array('_','.'), array('/',''), $class) . '.php'));
+	$base = dirname(__FILE__) . '/classes/';
+	
+	$class_raw = strtolower(str_replace('.', '', $class));
+	$class_trans = str_replace('_', '/', $class_raw);
+	$file_raw = realpath($base . $class_raw . '.php');
+	$file_trans = realpath($base . $class_trans . '.php');
+	
+	$filename = file_exists($file_raw) ? $file_raw : $file_trans;
+	
 	if ($filename && include_once($filename)) {
 		return true;
 	} else {
