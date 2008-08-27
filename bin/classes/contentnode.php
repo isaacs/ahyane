@@ -57,12 +57,24 @@ class ContentNode implements Countable {
 			return null;
 		}
 	}
-	// private function content ($content = null) {
-	// 	if ($content !== null) {
-	// 		$this->content = $content;
-	// 	}
-	// 	return $this->content;
-	// }
+	
+	public function __ ($path) {
+		$n = $this;
+		foreach (
+			explode("/", $path) as $p
+		) if (!$n) {
+			break;
+		} elseif ($p === '.' || $p === '') {
+			continue;
+		} elseif ($p === '..') {
+			$n = $n->parent;
+		} else {
+			$n = $n->_($p);
+		}
+		return $n;
+	}
+		
+	
 	private function json ($json = "") {
 		$j = json_decode($json);
 		if ($j === null) {
@@ -152,13 +164,13 @@ class ContentNode implements Countable {
 		}
 		return $parent;
 	}
-	public function path () {
+	private function path () {
 		return ($this->parent ? $this->parent->path() . '/' : '') . $this->name;
 	}
 	public function count () {
 		return $this->length();
 	}
-	public function length () {
+	private function length () {
 		return count(get_object_vars($this->children));
 	}
 }
