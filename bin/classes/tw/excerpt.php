@@ -1,7 +1,7 @@
 <?php
 
 class TW_Excerpt extends TW_Base {
-	public static function walk ($node) {
+	protected static function each ($node) {
 		$body = $node->content['body'];
 		if (false !== strpos($body, '<!--more-->')) {
 			$excerpt = explode('<!--more-->', $body);
@@ -11,8 +11,7 @@ class TW_Excerpt extends TW_Base {
 			$excerpt = substr($excerpt, 0, 250);
 		}
 		$node->content['excerpt'] = trim($excerpt);
-		
-		parent::walk($node, __CLASS__);
 	}
+	public static function walk ($node) { parent::walk($node); }
 }
 

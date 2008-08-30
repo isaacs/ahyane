@@ -1,15 +1,14 @@
 <?php
 
+// a sorry stand-in for a template engine.
 class TW_UnParseContent extends TW_Base {
-	public static function walk ($node) {
+	protected static function each ($node) {
 		if ($node->content && is_array($node->content)) {
-			// error_log(substr(json_encode($node->content), 0, 100));
-			
 			$node->content = $node->content['body'];
 		} else {
 			$node->content = null;
 		}
-		parent::walk($node, __CLASS__);
 	}
+	public static function walk ($node) { parent::walk($node); }
 }
 

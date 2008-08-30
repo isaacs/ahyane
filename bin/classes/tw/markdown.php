@@ -2,11 +2,11 @@
 
 class TW_Markdown extends TW_Base {
 	private static $parser = null;
-	public static function walk ($node) {
+	protected static function each ($node) {
 		if (!self::$parser) {
 			self::$parser = new Markdown_Parser;
 		}
 		$node->content['body'] = self::$parser->transform($node->content['body']);
-		parent::walk($node, __CLASS__);
 	}
+	public static function walk ($node) { parent::walk($node); }
 }

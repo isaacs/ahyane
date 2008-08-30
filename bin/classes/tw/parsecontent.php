@@ -1,9 +1,9 @@
 <?php
 
 class TW_ParseContent extends TW_Base {
-	public static function walk ($node) {
+	protected static function each ($node) {
 		$node->content = Parser::parse($node->content);
-		parent::walk($node, __CLASS__);
 	}
+	public static function walk ($node) { parent::walk($node); }
 }
 
