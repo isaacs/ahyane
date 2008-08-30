@@ -69,12 +69,18 @@ class Builder {
 		TW_ParseContent::walk(self::$htdocs);
 	}
 	
+	private static function makeArchives () {
+		
+	}
+	
 	private static function urlify () {
 		TW_Excerpt::walk(self::$htdocs);
+		
+		self::makeArchives();
+		
 		TW_Markdown::walk(self::$htdocs);
 		TW_UnParseContent::walk(self::$htdocs);
 		TW_AddIndexFile::walk(self::$htdocs);
-		
 	}
 	private static function display () {
 		echo "\n" . print_r( self::$htdocs->data, 1 );
