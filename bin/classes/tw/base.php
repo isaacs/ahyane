@@ -8,7 +8,7 @@ class TW_Base {
 	protected static function each ($node) {}
 	
 	// This MUST be overridden in child classes with:
-	//   public function walk ($node) { parent::walk($node); }
+	//   public static function walk ($node) { parent::walk($node); }
 	// Stupid, I know.
 	public static function walk ($node) {
 		$class = self::getClass();
@@ -20,7 +20,7 @@ class TW_Base {
 	
 	private final static function _each ($node) {
 		$class = self::getClass();
-		if (!empty($node->children)) {
+		if ($node->length) {
 			foreach ($node->children as $child) {
 				self::_each($child, $class);
 			}
