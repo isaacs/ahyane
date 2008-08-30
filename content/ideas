@@ -1,6 +1,11 @@
 title: Ahyane
 tags: ahyane
 
+
+Walkers:
+how best to implement an "onstart" and "onfinish" events for walking the tree?  kind of necessary.
+
+
 So, having to manage content in a folder structure, like I suggested below.  That sucks.  Fuck that.
 
 New plan: the metadata on a piece of content is what determines where it goes.  Organize the content folder however you like, so long as the metadata is good.
@@ -20,6 +25,7 @@ If the thing has a "stub" metadata, use that.  Otherwise, use the sanitized titl
 Permalinks: 
 If the thing has a date, then the canonical link is: /yyyy/dd/url-title/
 If it doesn't have a date, or if the "type" is "static", then the permalink is /url-title/
+
 
 
 
