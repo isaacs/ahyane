@@ -74,8 +74,7 @@ class Builder {
 	}
 	
 	private static function permalinks () {
-		TW_Pages::walk(self::$htdocs);
-		TW_Posts::walk(self::$htdocs);
+		TW_Permalinks::walk(self::$htdocs);
 	}
 	
 	private static function archives () {
