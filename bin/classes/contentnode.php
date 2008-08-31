@@ -73,7 +73,7 @@ class ContentNode implements Countable {
 		}
 		return $n;
 	}
-		
+	
 	
 	private function json ($json = "") {
 		$j = json_decode($json);
@@ -140,7 +140,7 @@ class ContentNode implements Countable {
 		} else {
 			$n = $child;
 		}
-		if (array_key_exists($n, $this->children)) {
+		if (property_exists($this->children, $n)) {
 			unset($this->children->$n);
 		}
 		return $child;
@@ -165,7 +165,7 @@ class ContentNode implements Countable {
 		return $parent;
 	}
 	private function path () {
-		return ($this->parent ? $this->parent->path() . '/' : '') . $this->name;
+		return ($this->parent ? $this->parent->path() : '') . '/'  . $this->name;
 	}
 	public function count () {
 		return $this->length();
