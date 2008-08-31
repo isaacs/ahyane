@@ -78,6 +78,14 @@ class ContentNode implements Countable {
 		return $n;
 	}
 	
+	public function header ($header, $else = null) {
+		return (
+			is_object($this->content) &&
+			property_exists($this->content, "headers") &&
+			is_object($this->content->headers) &&
+			property_exists($this->content->headers, $header)
+		) ? $this->content->headers->$header : $else;
+	}
 	
 	private function json ($json = "") {
 		$j = json_decode($json);
