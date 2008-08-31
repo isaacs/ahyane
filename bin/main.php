@@ -25,3 +25,6 @@ function ahyane_autoloader ($class) {
 
 spl_autoload_register('ahyane_autoloader');
 
+function to_object ($x) {
+	return (is_object($x) || is_array($x)) ? json_decode(json_encode($x)) : (object) $x;
+}
