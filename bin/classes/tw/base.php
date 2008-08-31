@@ -12,13 +12,21 @@ class TW_Base {
 	// Stupid, I know.
 	public static function walk ($node) {
 		$class = self::getClass();
+		self::$cache = array();
 		call_user_func(array($class, "start"), $node);
 		self::_each($node, $class);
 		call_user_func(array($class, "finish"), $node);
 		self::$class = null;
+		self::$cache = array();
 	}
 	
+	private static $cache = array();
+	
 	private final static function _each ($node) {
+		if (in_array($node, self::$cache)) {
+			return;
+		}
+		self::$cache[] = $node;
 		$class = self::getClass();
 		if ($node->length) {
 			foreach ($node->children as $child) {
