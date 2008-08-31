@@ -1,5 +1,6 @@
 title: Ahyane
 tags: ahyane
+date: 2008-03-06 10:00:03
 
 
 Walkers:
@@ -20,7 +21,7 @@ draft - not published
 blog - a blog post in the date archives (default if there's a date on the thing.)
 
 url-titles:
-If the thing has a "stub" metadata, use that.  Otherwise, use the sanitized title.
+If the thing has a "slug" metadata, use that.  Otherwise, use the sanitized title.
 
 Permalinks: 
 If the thing has a date, then the canonical link is: /yyyy/dd/url-title/

@@ -13,7 +13,7 @@ These are "simple" because, for each one, they just perform some operation on th
 
 1. Treewalkers that basically must succeed for the build to work Should they modify the contents to "fix" any problems, or just bork out and die on any errors? Not sure.
 	1. read titles (default to "untitled entry" or some such?)
-	2. create url-stub data from title (ensure uniqueness)
+	2. create url-slug data from title (ensure uniqueness)
 	
 2. Treewalkers that just do stuff to each node, but don't have to be too picky.
 	1. markdown transform — Forget all the others.  Textmate has incredibly good markdown support out of the box, and I like it.  Markdown wins.

@@ -4,7 +4,7 @@
 class TW_UnParseContent extends TW_Base {
 	protected static function each ($node) {
 		if ($node->content && is_object($node->content)) {
-			$node->content = $node->content->body;
+			$node->content = var_export($node->content, 1);
 		} else {
 			$node->content = null;
 		}

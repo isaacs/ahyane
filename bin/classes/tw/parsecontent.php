@@ -13,9 +13,9 @@ class TW_ParseContent extends TW_Base {
 				)->filename), MB_CASE_TITLE, 'UTF-8'
 			);
 	}
-	private static function getStub ($node) {
-		return (property_exists($node->content->headers, 'stub')) ?
-			$node->content->headers->stub :
+	private static function getSlug ($node) {
+		return (property_exists($node->content->headers, 'slug')) ?
+			$node->content->headers->slug :
 			preg_replace('~[^a-zA-Z0-9%]+~', '-',
 				str_replace('%20', ' ', rawurlencode( strtolower( trim(self::getTitle($node)) ) ) )
 			);
@@ -31,9 +31,9 @@ class TW_ParseContent extends TW_Base {
 	}
 	
 	private static function getHeaders ($node) {
-		// get the stub
+		// get the slug
 		$node->content->headers->title = self::getTitle($node);
-		$node->content->headers->stub = self::getStub($node);
+		$node->content->headers->slug = self::getSlug($node);
 		
 		if (
 			property_exists($node->content->headers, "date")
@@ -43,7 +43,7 @@ class TW_ParseContent extends TW_Base {
 
 		$node->content->headers->type = self::getType($node);
 		$node->content->headers->status = self::getStatus($node);
-		$node->name = $node->content->headers->stub;
+		$node->name = $node->content->headers->slug;
 		
 		return $node->content->headers;
 	}
