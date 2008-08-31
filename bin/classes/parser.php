@@ -7,7 +7,7 @@ class Parser {
 		foreach (explode("\n", $rawhead) as $header) {
 			$header = explode(":", $header);
 			$name = strtolower(trim(array_shift($header)));
-			if (!preg_match('~^[a-z0-9_-]~', $name)) continue;
+			if (!preg_match('~^[a-z0-9]~', $name)) continue;
 			$val = trim(implode(":", $header));
 			if (property_exists($headers, $name)) {
 				$headers->$name = array($headers->$name);
