@@ -45,20 +45,24 @@ class ContentNode implements Countable {
 	}
 	
 	// just a handy syntax for grabbing a direct child by name.
-	public function _ ($name) {
+	public function _ ($name, $create = false) {
 		// error_log("getting child [$name] from $this->name");
 		// error_log(var_dump(array_keys($this->children), 1));
 		// 
-		if (array_key_exists($name, $this->children)) {
-			// error_log("found it");
+		
+		if (is_string($name) && property_exists($this->children, $name)) {
 			return $this->children->$name;
+		} elseif (is_object($name) && property_exists($this->chilren, $name->name)) {
+			$name = $name->name;
+			return $this->children->$name;
+		} elseif ($create) {
+			return $this->child( new ContentNode($name) );
 		} else {
-			// error_log("not here");
 			return null;
 		}
 	}
 	
-	public function __ ($path) {
+	public function __ ($path, $create = false) {
 		$n = $this;
 		foreach (
 			explode("/", $path) as $p
@@ -69,7 +73,7 @@ class ContentNode implements Countable {
 		} elseif ($p === '..') {
 			$n = $n->parent;
 		} else {
-			$n = $n->_($p);
+			$n = $n->_($p, $create);
 		}
 		return $n;
 	}
@@ -95,7 +99,7 @@ class ContentNode implements Countable {
 			if (count(get_object_vars($this->children)) > 0) {
 				$data->children = new stdClass();
 				foreach ($this->children as $child) {
-					$data->children->{$child->name} = $child->data;
+					$data->children->{$child->name} = $child->data();
 				}
 			}
 		} else {
