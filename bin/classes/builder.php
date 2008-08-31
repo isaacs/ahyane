@@ -56,7 +56,7 @@ class Builder {
 		Builder::make(array(
 			'remove',
 			'read',
-			'parse',
+			'parse', ///////
 			
 			// insert magic here...
 			
@@ -69,14 +69,29 @@ class Builder {
 		TW_ParseContent::walk(self::$htdocs);
 	}
 	
-	private static function makeArchives () {
-		
+	private static function pool () {
+		TW_Pool::walk(self::$htdocs);
+	}
+	
+	private static function permalinks () {
+		TW_Pages::walk(self::$htdocs);
+		TW_Posts::walk(self::$htdocs);
+	}
+	
+	private static function archives () {
+		TW_DateArchive::walk(self::$htdocs);
+		TW_TagArchive::walk(self::$htdocs);
+		TW_Paginate::walk(self::$htdocs);
 	}
 	
 	private static function urlify () {
 		TW_Excerpt::walk(self::$htdocs);
 		
-		self::makeArchives();
+		self::make(array(
+			"pool",
+			"permalinks",
+			"archives"
+		));
 		
 		TW_Markdown::walk(self::$htdocs);
 		TW_UnParseContent::walk(self::$htdocs);
