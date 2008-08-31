@@ -7,7 +7,7 @@ class Parser {
 		foreach (explode("\n", $rawhead) as $header) {
 			$header = explode(":", $header);
 			$name = strtolower(trim(array_shift($header)));
-			if (!preg_match('~^[a-z0-9]~', $name)) continue;
+			if (!preg_match('~^[a-z0-9_-]~', $name)) continue;
 			$val = trim(implode(":", $header));
 			if (property_exists($headers, $name)) {
 				$headers->$name = array($headers->$name);
@@ -21,7 +21,7 @@ class Parser {
 	
 	function parse ($content) {
 		if (is_object($content) && !is_null($content)) {
-			error_log(" - - - This is odd.  Parsing parsed content?");
+			// error_log(" - - - This is odd.  Parsing parsed content?");
 			// var_dump($content);
 			// $trace = debug_backtrace();
 			// foreach ($trace as $i => $t) {
