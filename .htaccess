@@ -1,10 +1,11 @@
 RewriteEngine On
 
-RewriteBase /ahyane
+RewriteBase /
 
 RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI} !-f
 RewriteCond %{DOCUMENT_ROOT}/ahyane/htdocs/$1/index.html -f
 RewriteRule ^(.*)$ %{DOCUMENT_ROOT}/ahyane/htdocs/$1/index.html [L]
+
 
 
 # 
