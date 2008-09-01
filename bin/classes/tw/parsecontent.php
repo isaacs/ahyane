@@ -22,7 +22,7 @@ class TW_ParseContent extends TW_Base {
 	}
 	private static function getType ($node) {
 		return $node->header("type",
-			( property_exists($node->content->headers, 'date') ? 'blog' : 'static' )
+			( $node->header("date") ? 'blog' : 'static' )
 		);
 	}
 	private static function getStatus ($node) {
