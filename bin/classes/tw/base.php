@@ -23,7 +23,7 @@ class TW_Base {
 	private static $cache = array();
 	
 	private final static function _each ($node) {
-		if (in_array($node, self::$cache)) {
+		if (in_array($node, self::$cache, true)) {
 			return;
 		}
 		self::$cache[] = $node;
