@@ -49,7 +49,11 @@ class TW_DateArchive extends TW_Base {
 		self::$postsByDate = array();
 	}
 	protected static function each ($node) {
-		if (!$node->header("date") || !$node->header("permalink")) return;
+		if (
+			!$node->header("date") ||
+			!$node->header("permalink") ||
+			$node->header("type") === "static"
+		) return;
 		while (
 			array_key_exists($node->header("date"), self::$postsByDate)
 		) $node->content->headers->date ++;
