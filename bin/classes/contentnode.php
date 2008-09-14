@@ -23,7 +23,7 @@ class ContentNode implements Countable {
 	public function __get ($k) {
 		if (in_array($k, array(
 			// these have getter functions.
-			'parent', 'data', 'json', 'path', 'length', 'count'
+			'parent', 'data', 'json', 'path', 'length', 'count', 'root'
 		))) {
 			return $this->$k();
 		} else {
@@ -33,7 +33,7 @@ class ContentNode implements Countable {
 	public function __set ($k, $v) {
 		if (in_array($k, array(
 			// these have setter functions.
-			'name', 'data', 'json', 'parent', 'path', 'child', 'transform', 'remove'
+			'name', 'data', 'json', 'parent', 'path'
 		))) {
 			return $this->$k($v);
 		}	else {
@@ -176,8 +176,23 @@ class ContentNode implements Countable {
 		}
 		return $parent;
 	}
-	private function path () {
-		return ($this->parent ? $this->parent->path() : '') . '/'  . $this->name;
+	
+	private function root () {
+		for ($r = $n = $this; $n = $n->parent(); $r = $n);
+		return $r;
+	}
+	
+	private function path ($newpath = null) {
+		if (!is_string($newpath)) {
+			return (
+				$this->parent && $this->parent->parent ? $this->parent->path() : ''
+			) . '/'  . $this->name;
+		}
+		$newpath = explode("/", $newpath);
+		$this->name(array_pop($newpath));
+		$newpath = implode("/", $newpath);
+		$this->parent( $this->root()->__($newpath, true) );
+		return $this->path();
 	}
 	public function count () {
 		return $this->length();
