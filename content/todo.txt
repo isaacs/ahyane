@@ -1,10 +1,18 @@
 title: Todo
-tags: ahyane
+tags: ahyane, todo, Brain Dump®
 type: static
 
 These are some of the things that need to be done.  This right here is an excerpt.
 
 <!--more-->
+
+Left right now:
+
+1. Finish up the posts-by-tags thing - abstract it into a general "archive by X" thingie/
+2. sort all the archives descending by date.
+3. paginate
+4. templates
+
 
 
 ## Simple Treewalkers
