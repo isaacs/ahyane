@@ -29,15 +29,22 @@ class TW_ParseContent extends TW_Base {
 		return $node->header("status", 'published');
 	}
 	
+	private static function getTags ($node) {
+		return array_map('trim', explode(",", $node->header("tags", "")));
+	}
+	
 	private static function getHeaders ($node) {
 		// get the slug
 		$node->content->headers->title = self::getTitle($node);
 		$node->content->headers->slug = self::getSlug($node);
 		
+		$node->content->headers->tags = self::getTags($node);
+		
 		$node->content->headers->date = strtotime($node->header("date"));
 
 		$node->content->headers->type = self::getType($node);
 		$node->content->headers->status = self::getStatus($node);
+		$node->content->headers->original = $node->path;
 		$node->name = $node->content->headers->slug;
 		
 		return $node->content->headers;
