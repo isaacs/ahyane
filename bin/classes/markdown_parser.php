@@ -20,7 +20,7 @@ define( 'MARKDOWN_VERSION',  "1.0.1m" ); # Sat 21 Jun 2008
 #
 
 # Change to ">" for HTML output
-@define( 'MARKDOWN_EMPTY_ELEMENT_SUFFIX',  " />");
+@define( 'MARKDOWN_EMPTY_ELEMENT_SUFFIX',  ">");
 
 # Define the width of a tab for code blocks.
 @define( 'MARKDOWN_TAB_WIDTH',     4 );
