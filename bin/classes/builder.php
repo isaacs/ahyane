@@ -80,6 +80,7 @@ class Builder {
 	private static function archives () {
 		TW_DateArchive::walk(self::$htdocs);
 		TW_TagArchive::walk(self::$htdocs);
+		TW_ArchiveSort::walk(self::$htdocs);
 		TW_Paginate::walk(self::$htdocs);
 	}
 	
