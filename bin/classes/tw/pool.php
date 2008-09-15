@@ -21,29 +21,28 @@ class TW_Pool extends TW_Base {
 		self::$pool = null;
 		self::$root = null;
 	}
-			
+	
 	protected static function each ($node) {
-		if ($node === self::$root || $node === self::$pool) {
-			// error_log("special, don't touch $node");
-			return;
-		}
-		if (!(
-			is_object($node->content) &&
-			property_exists($node->content, "body") &&
-			$node->content->body
-		)) return;
 		
-		$name = $n = $node->name;
-		$i = 0;
-		// error_log("handling $name");
+		if (
+			$node === self::$root ||
+			$node === self::$pool ||
+			!(
+				is_object($node->content) &&
+				property_exists($node->content, "body") &&
+				$node->content->body
+			)
+		) return;
+		
+		$name = $n = $node->header("slug", $node->name);
+		$i = 2;
 		// make sure it's unique.
 		while ( self::$pool->_($n) ) {
 			$n = "$name-$i";
 			$i ++;
 		}
-		// error_log("new name: $n");
-		$node->name = $n;
-		self::$pool->child($node);
+		$node->path = "/___pool/$n";
+		$node->content->headers->slug = $n;
 	}
 	
 	public static function walk ($node) { parent::walk($node); }

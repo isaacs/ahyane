@@ -30,7 +30,11 @@ class TW_ParseContent extends TW_Base {
 	}
 	
 	private static function getTags ($node) {
-		return array_map('trim', explode(",", $node->header("tags", "")));
+		$tags = array();
+		foreach (
+			array_map('trim', explode(",", $node->header("tags", ""))) as $t
+		) if ($t) $tags[] = $t;
+		return $tags;
 	}
 	
 	private static function getHeaders ($node) {
@@ -45,7 +49,7 @@ class TW_ParseContent extends TW_Base {
 		$node->content->headers->type = self::getType($node);
 		$node->content->headers->status = self::getStatus($node);
 		$node->content->headers->original = $node->path;
-		$node->name = $node->content->headers->slug;
+		// $node->name = $node->content->headers->slug;
 		
 		return $node->content->headers;
 	}
