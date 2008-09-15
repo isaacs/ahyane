@@ -1,4 +1,4 @@
-#!/opt/local/bin/php
+#!/usr/bin/env php
 <?php
 
 require( dirname(__FILE__) . '/main.php' );
