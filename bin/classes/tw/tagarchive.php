@@ -11,7 +11,7 @@ class TW_TagArchive extends TW_Base {
 		
 		// now we have arrays of posts.
 		// turn into new thing with lists of miniposts?
-		foreach (self::$postsByTag as $tag => $list) if ($tag) {
+		foreach (self::$postsByTag as $tag => $list) if ($tag && count($list) > 0) {
 			// $key is something like 2008/05/01
 			// $list is an array of node references.
 			
