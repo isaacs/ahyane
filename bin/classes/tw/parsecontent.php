@@ -49,7 +49,6 @@ class TW_ParseContent extends TW_Base {
 		$node->content->headers->type = self::getType($node);
 		$node->content->headers->status = self::getStatus($node);
 		$node->content->headers->original = $node->path;
-		// $node->name = $node->content->headers->slug;
 		
 		return $node->content->headers;
 	}

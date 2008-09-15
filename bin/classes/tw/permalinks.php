@@ -24,7 +24,7 @@ class TW_Permalinks extends TW_Base {
 	}
 	
 	protected static function each ($node) {
-		// error_log("Posts walker: ". $node->path);
+		error_log("Permalink walker: ". $node->path);
 		if (
 			is_object($node->content) && $node !== self::$root
 		) $node->path = $node->content->headers->permalink = self::getPermalink($node);
