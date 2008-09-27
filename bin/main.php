@@ -5,8 +5,10 @@ if (defined('AHYANE_LOADED')) {
 }
 define('AHYANE_LOADED', true);
 
+define('AHYANE_BASEDIR', realpath(dirname(__FILE__) . '/../'));
+
 function ahyane_autoloader ($class) {
-	$base = dirname(__FILE__) . '/classes/';
+	$base = AHYANE_BASEDIR . '/bin/classes/';
 	
 	$class_raw = strtolower(str_replace('.', '', $class));
 	$class_trans = str_replace('_', '/', $class_raw);
