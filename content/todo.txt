@@ -8,12 +8,11 @@ These are some of the things that need to be done.  This right here is an excerp
 
 Left to do right now:
 
-1. Finish up the posts-by-tags thing - abstract it into a general "archive by X" thingie. (Maybe something for author, etc?  What other metadata should be archiveable?) - Skip for now.
-2. sort all the archives descending by date. - done. TW_ArchiveSort
-3. paginate
-4. templates
-
-
+1. <del>Finish up the posts-by-tags thing - abstract it into a general "archive by X" thingie. (Maybe something for author, etc?  What other metadata should be archiveable?) - Skip for now.</del>
+2. <del>sort all the archives descending by date. - done. TW_ArchiveSort</del>
+3. <del>paginate</del>
+4. <del>templates</del>
+5. The default index and paginated blog posts (not by date, per se, just ordered)
 
 
 ## Simple Treewalkers
