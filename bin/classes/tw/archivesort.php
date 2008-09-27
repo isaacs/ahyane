@@ -7,7 +7,8 @@ class TW_ArchiveSort extends TW_Base {
 			!is_array($node->content->body)
 		) return;
 		$posts = array();
-		foreach ($node->content->body as $post) {
+		foreach ( $node->content->body as $post ) {
+			if (!$post->headers->date) $post->headers->date = 0;
 			while (
 				array_key_exists($post->headers->date, $posts)
 			) $post->headers->date ++;

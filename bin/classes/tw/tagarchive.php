@@ -15,7 +15,7 @@ class TW_TagArchive extends TW_Base {
 			// $key is something like 2008/05/01
 			// $list is an array of node references.
 			
-			$result = $node->__("category/" . self::$tagsToSlugs[$tag], true);
+			$result = $node->__("tag/" . self::$tagsToSlugs[$tag], true);
 			$result->content = to_object(array(
 				'headers' => array(
 					'archive' => true,
@@ -63,8 +63,7 @@ class TW_TagArchive extends TW_Base {
 	protected static function each ($node) {
 		if (
 			!$node->header("tags") ||
-			!is_array($node->header("tags")) ||
-			$node->header("type") === "static"
+			!is_array($node->header("tags"))
 		) return;
 		foreach (
 			$node->header("tags") as $tag
