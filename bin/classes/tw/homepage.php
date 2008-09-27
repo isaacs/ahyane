@@ -17,7 +17,7 @@ class TW_HomePage extends TW_Base {
 			!$node->header("permalink") ||
 			$node->header("type") === "static"
 		) return;
-		self::$posts[] = to_object($node->content);
+		self::$posts[] = $node->content;
 	}
 	
 	public static function walk ($node) { parent::walk($node); }
