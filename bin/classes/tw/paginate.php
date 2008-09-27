@@ -18,7 +18,7 @@ class TW_Paginate extends TW_Base {
 		
 		for ($i = 1; $i <= $maxpages; $i ++) {
 			$p = $node->__(self::PAGE_PREFIX . "/$i", true);
-			$p->content = $node->content;
+			$p->content = to_object($node->content);
 			$p->content->headers->page = $i;
 			$p->content->body = array_slice($posts, $i - 1, self::PAGE_MAX);
 		}
