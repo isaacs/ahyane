@@ -12,7 +12,8 @@ Left to do right now:
 2. <del>sort all the archives descending by date. - done. TW_ArchiveSort</del>
 3. <del>paginate</del>
 4. <del>templates</del>
-5. The default index and paginated blog posts (not by date, per se, just ordered)
+5. <del>The default index and paginated blog posts (not by date, per se, just ordered)</del>
+6. Put titles on the archive pages.
 
 
 ## Simple Treewalkers
