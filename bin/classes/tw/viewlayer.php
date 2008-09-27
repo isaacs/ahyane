@@ -1,7 +1,7 @@
 <?php
 
 // a sorry stand-in for a template engine.
-class TW_UnParseContent extends TW_Base {
+class TW_ViewLayer extends TW_Base {
 	protected static function each ($node) {
 		if ($node->content && is_object($node->content)) {
 			// $node->content = print_r($node->content, 1);

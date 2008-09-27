@@ -94,7 +94,7 @@ class Builder {
 		));
 		
 		TW_Markdown::walk(self::$htdocs);
-		TW_UnParseContent::walk(self::$htdocs);
+		TW_ViewLayer::walk(self::$htdocs);
 		TW_AddIndexFile::walk(self::$htdocs);
 	}
 	private static function display () {
