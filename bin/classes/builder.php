@@ -38,10 +38,9 @@ class Builder {
 					return false;
 				}
 			}
-			return @rmdir($file);
-		} else {
-			return @unlink($file);
+			return rmdir($file);
 		}
+		return @unlink($file);
 	}
 	
 	
