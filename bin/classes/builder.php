@@ -6,7 +6,7 @@ class Builder {
 	private static $htdocs = null;
 	
 	public static function make ($argv = array()) {
-		error_log("make " . print_r($argv,1));
+		error_log("Builder::make " . implode(" ", $argv));
 		if (empty($argv)) {
 			$argv = array('full');
 		}
@@ -15,6 +15,7 @@ class Builder {
 		}
 		foreach ($argv as $arg) {
 			if (method_exists("Builder", $arg)) {
+				error_log("--> $arg");
 				Builder::$arg();
 			}
 		}
@@ -55,10 +56,7 @@ class Builder {
 		Builder::make(array(
 			'remove',
 			'read',
-			'parse', ///////
-			
-			// insert magic here...
-			
+			'parse',
 			'urlify',
 			'write'
 			// ,'display' // debuggery.
@@ -127,7 +125,7 @@ class Builder {
 	static function write () {
 		// call renderers (templates, markup, etc.)
 		// write all the files from the data tree.
-		Builder::make(array('writeCache'));
+		// Builder::make(array('writeCache'));
 		// error_log("writing ===>> " . json_encode(self::$htdocs->data));
 		FileTree::write(self::$htdocs);
 	}

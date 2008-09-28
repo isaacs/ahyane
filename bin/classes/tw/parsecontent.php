@@ -45,10 +45,16 @@ class TW_ParseContent extends TW_Base {
 		$node->content->headers->tags = self::getTags($node);
 		
 		$node->content->headers->date = strtotime($node->header("date"));
-
 		$node->content->headers->type = self::getType($node);
 		$node->content->headers->status = self::getStatus($node);
 		$node->content->headers->original = $node->path;
+		
+		if (
+			$filename = realpath(
+				AHYANE_BASEDIR . '/content' . $node->content->headers->original
+			)
+		) $node->content->headers->modified = filemtime($filename);
+		
 		
 		return $node->content->headers;
 	}
