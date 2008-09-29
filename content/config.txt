@@ -1,0 +1,13 @@
+title: Config
+
+Config variables are read from the following places:
+
+1. .ahyaneconfig in the bin folder
+2. .ahyaneconfig file in the content folder
+3. .ahyaneconfig file in the target (htdocs) folder
+4. command line invocation of build.php
+
+Settings cascade, so something on the command line overrides something in the target folder, etc.
+
+The .ahyaneconfig in the bin folder should contain a value for every possible var, both by way of documentation as well as to keep defaults out of the code itself.
+
