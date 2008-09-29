@@ -1,0 +1,7 @@
+title: Commenting
+slug: comments
+
+Write some JS that hits the disqus API.
+
+To fall back, have a link that points to the Disqus site for the post in question.
+
