@@ -21,3 +21,8 @@ content: content
 output: htdocs
 template: tpl
 
+# site stuff
+tagprefix: tag
+
+
+
