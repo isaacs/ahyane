@@ -54,6 +54,7 @@ class Builder {
 	}
 	private static function full () {
 		Builder::make(array(
+			'config',
 			'remove',
 			'read',
 			'parse',
@@ -62,6 +63,18 @@ class Builder {
 			// ,'display' // debuggery.
 		));
 	}
+	private static function config () {
+		// first, freeze anything up to this point, most likely from command line.
+		Config::fixAll();
+		// now, load up the defaults in the ahyane basedir.
+		Config::read(AHYANE_BASEDIR . '/bin/.ahyaneconfig');
+		
+	}
+	private static function showConfig () {
+		self::config();
+		var_dump(Config::getAll());
+	}
+	
 	private static function parse () {
 		TW_ParseContent::walk(self::$htdocs);
 	}

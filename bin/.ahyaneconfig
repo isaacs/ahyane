@@ -1,0 +1,24 @@
+# The default ahyane config file.  This follows the same syntax as the header section,
+# but an empty line doesn't mark the start of a "body" section.
+
+# This file, in the ahyane bin folder, sets all the defaults that are used by
+# this installation of ahyane.  You should not edit this file directly. Instead,
+# change the settings by putting a .ahyaneconfig file in the input directory where
+# your content lives, to override just the bits you want to make different.
+
+# Also, you can override specific arguments at the command line via --foo=bar
+# or --foo="bar baz quux" for items with spaces in them.
+
+# Typically, your call to the ahyane builder will be something like this:
+# ahyane/bin/build.php --content=/Users/isaacs/blogs/foohack/
+# and then you'd put the configs for that blog inside of that content folder.
+
+# Path names are relative to the ahyane basedir, unless they start with a /, in which case,
+# they're absolute.
+
+# folders
+bin: bin
+content: content
+output: htdocs
+templates: tpl
+

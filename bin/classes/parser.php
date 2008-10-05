@@ -32,11 +32,7 @@ class Parser {
 			return $content;
 		}
 		
-		
-		
 		$parts = explode("\n\n", $content);
-
-		
 		return to_object(array(
 			'headers' => self::parseHeaders(array_shift($parts)),
 			'body' => (count($parts) > 0) ? trim(implode("\n\n", $parts)) : null
@@ -47,6 +43,13 @@ class Parser {
 		return (!is_readable($filename) || !is_file($filename)) ?
 			null :
 			self::parse( file_get_contents($filename) );
+	}
+	
+	// just like read, but parses it as a single big header section.
+	function readHeaderFile ($filename) {
+		return (!is_readable($filename) || !is_file($filename)) ?
+			null :
+			self::parseHeaders( preg_replace("~\n{2,}~", "\n", file_get_contents($filename)) );
 	}
 	
 }
