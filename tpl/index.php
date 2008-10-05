@@ -12,16 +12,6 @@
 	<h1><?php echo $node->header("title", "erm... something?"); ?></h1>
 <?php
 
-// if ($node->header("archive")) {
-// 	// this is where you'd loop through the posts or something?
-// 	foreach ($node->content->body as $piece) {
-// 		echo "<h2>" . $piece->headers->title . "</h2>";
-// 		echo "<h3>" . $piece->headers->permalink . "</h3>";
-// 		echo "<pre>" . $piece->excerpt . "</pre>";
-// 	}
-// } else {
-// 	echo $node->content->body;
-// }
 
 echo "<pre>";
 var_dump($node->content);
