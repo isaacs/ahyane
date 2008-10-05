@@ -16,6 +16,9 @@
 # Path names are relative to the ahyane basedir, unless they start with a /, in which case,
 # they're absolute.
 
+# Lines that START with a # are comments.  But # doesn't comment out the rest of
+# a line like in sh or Apache configs.
+
 # folders
 content: content
 output: htdocs
