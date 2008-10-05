@@ -96,6 +96,8 @@ class Builder {
 			"Path does not exist, could not be created: " . Config::get($k), E_USER_ERROR
 		);
 		
+		// nothing additional should be changed from now on.
+		Config::fixAll();
 	}
 	private static function showConfig () {
 		error_log( var_export(Config::getAll(), 1) );
