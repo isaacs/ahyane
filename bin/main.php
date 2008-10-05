@@ -6,6 +6,7 @@ if (defined('AHYANE_LOADED')) {
 define('AHYANE_LOADED', true);
 
 define('AHYANE_BASEDIR', realpath(dirname(__FILE__) . '/../'));
+chdir(AHYANE_BASEDIR);
 
 function ahyane_autoloader ($class) {
 	$base = AHYANE_BASEDIR . '/bin/classes/';
