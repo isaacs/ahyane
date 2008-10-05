@@ -32,3 +32,4 @@ Permalink: /Y/m/%slug%
 MaxPerPage: 5
 PagePrefix: page/
 
+ExcerptLength: 250
