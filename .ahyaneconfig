@@ -17,8 +17,7 @@
 # they're absolute.
 
 # folders
-bin: bin
 content: content
 output: htdocs
-templates: tpl
+template: tpl
 
