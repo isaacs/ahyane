@@ -6,7 +6,11 @@ class Config {
 	private static $instance = null;
 	
 	public static function get ($key, $default = null) {
-		return array_key_exists($key, self::$conf) ? self::$conf[$key] : $default;
+		if (!array_key_exists($key, self::$conf)) {
+			trigger_error("Warning: $key not found in config.", E_USER_WARNING);
+			return $default;
+		}
+		return self::$conf[$key];
 	}
 	public static function geta ($arr) {
 		$ret = array();
