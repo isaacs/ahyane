@@ -1,8 +1,5 @@
 <?php
 
-// right now, the permalink style for blogs is /YYYY/MM/url-slug, and is not configurable.
-// Todo: make it configurable.
-
 class TW_Permalinks extends TW_Base {
 	private static $root = null;
 	protected static function start ($node) {
@@ -13,7 +10,7 @@ class TW_Permalinks extends TW_Base {
 	}
 	
 	private static function getBlogPermalink ($node) {
-		$parts = explode("%slug%", Config::get("permalinkprefix"));
+		$parts = explode("%slug%", Config::get("permalink"));
 		foreach (
 			$parts as $i => $part
 		) $parts[$i] = date($part, $node->content->headers->date);

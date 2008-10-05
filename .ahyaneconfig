@@ -27,7 +27,8 @@ template: tpl
 # site stuff
 tagprefix: tag
 # anything parseable by the php date() function, or %slug%
-permalink: /Y/m/%slug%
+Permalink: /Y/m/%slug%
 
-
+MaxPerPage: 5
+PagePrefix: page/
 
