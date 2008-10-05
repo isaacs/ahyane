@@ -26,7 +26,8 @@ template: tpl
 
 # site stuff
 tagprefix: tag
-permalinkprefix: /Y/m/
+# anything parseable by the php date() function, or %slug%
+permalink: /Y/m/%slug%
 
 
 

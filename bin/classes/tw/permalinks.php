@@ -12,15 +12,22 @@ class TW_Permalinks extends TW_Base {
 		self::$root = null;
 	}
 	
+	private static function getBlogPermalink ($node) {
+		$parts = explode("%slug%", Config::get("permalinkprefix"));
+		foreach (
+			$parts as $i => $part
+		) $parts[$i] = date($part, $node->content->headers->date);
+		return implode($node->content->headers->slug, $parts);
+	}
 	private static function getPermalink ($node) {
-		
 		return (
 			$node->header("status") === "draft" ?
 				"/drafts/" : ""
 		) . (
 			$node->header("type") === "blog" ?
-				date(Config::get("permalinkprefix"), $node->content->headers->date) : ""
-		) . $node->content->headers->slug;
+				self::getBlogPermalink($node) :
+				$node->content->headers->slug
+		);
 	}
 	
 	protected static function each ($node) {
