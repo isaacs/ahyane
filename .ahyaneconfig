@@ -1,7 +1,7 @@
 # The default ahyane config file.  This follows the same syntax as the header section,
 # but an empty line doesn't mark the start of a "body" section.
 
-# This file, in the ahyane bin folder, sets all the defaults that are used by
+# This file, in the ahyane base folder, sets all the defaults that are used by
 # this installation of ahyane.  You should not edit this file directly. Instead,
 # change the settings by putting a .ahyaneconfig file in the input directory where
 # your content lives, to override just the bits you want to make different.
