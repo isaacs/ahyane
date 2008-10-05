@@ -18,8 +18,9 @@ Left to do right now:
 8. Make it simple to wire up comments to Disqus.  See the "comments" page, sibling of this one.
 9. Keep blowing out the template stuff, to continue to expose data that needs to be gathered in the build step.  (Also, this is a fun creative FE design task.)
 10. Packaging – Once we have configurations that are more dynamic, figure out an easy way to have a few different sites that are built from a single /bin folder.  Also, work through all the oddities with Apache rules, so that setting up a new site isn't too strange.
-11. Make the home page configurable
+11. <del>Make the home page configurable</del>
 12. Search — Use google or yahoo to search the site.  Figure out a way to make that not suck.
+13. Hierarchical static pages.
 
 
 The stuff below is all done already, but I didn't feel like throwing it away.  Some of it makes for pretty good documentation about how things work.

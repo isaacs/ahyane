@@ -33,3 +33,8 @@ MaxPerPage: 5
 PagePrefix: page/
 
 ExcerptLength: 250
+
+# If there's a static page by this name, it'll use that as the default index page.
+# If not, or if it's missing, then it'll use the most recent blog posts.
+HomePage: home
+
