@@ -19,7 +19,7 @@ class TW_Permalinks extends TW_Base {
 				"/drafts/" : ""
 		) . (
 			$node->header("type") === "blog" ?
-				date("/Y/m/", $node->content->headers->date) : ""
+				date(Config::get("permalinkprefix"), $node->content->headers->date) : ""
 		) . $node->content->headers->slug;
 	}
 	
