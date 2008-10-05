@@ -4,9 +4,11 @@ class Builder {
 	
 	private static $content = null;
 	private static $htdocs = null;
+	private static $config_done = false;
 	
 	public static function make ($argv = array()) {
 		error_log("Builder::make " . implode(" ", $argv));
+		$argv = Config::readArgs($argv);
 		self::config();
 		
 		if (empty($argv)) {
@@ -44,7 +46,7 @@ class Builder {
 		}
 		return @unlink($file);
 	}
-		
+	
 	private static function clean () {
 		self::emptyDir("bin/cache");
 		self::emptyDir(Config::get("output"));
@@ -53,16 +55,20 @@ class Builder {
 		self::rm_recurse(Config::get("output"));
 	}
 	private static function full () {
-		Builder::make(array(
+		self::make(array(
 			'remove',
 			'read',
 			'parse',
 			'urlify',
 			'write'
-			// ,'display' // debuggery.
 		));
 	}
 	private static function config () {
+		
+		if (self::$config_done) return;
+		
+		self::$config_done = true;
+		
 		// first, freeze anything up to this point, most likely from command line.
 		Config::fixAll();
 		
@@ -92,7 +98,6 @@ class Builder {
 		
 	}
 	private static function showConfig () {
-		self::config();
 		error_log( var_export(Config::getAll(), 1) );
 	}
 	
@@ -120,34 +125,25 @@ class Builder {
 		TW_Excerpt::walk(self::$htdocs);
 		
 		self::make(array(
-			"pool",
-			"permalinks",
-			"archives"
+			'pool',
+			'permalinks',
+			'archives'
 		));
 		
 		TW_Markdown::walk(self::$htdocs);
 		TW_ViewLayer::walk(self::$htdocs);
 		TW_AddIndexFile::walk(self::$htdocs);
 	}
+	
 	private static function display () {
 		echo "\n" . print_r( self::$htdocs->data, 1 );
 	}
 	
-	
 	// read in the content folder, and make the 
 	private static function read () {
 		self::$content = FileTree::read(Config::get("content"));
-		// error_log("content: " . self::$content . json_encode(self::$content->data));
 		self::$htdocs = new ContentNode(self::$content->data);
 		self::$htdocs->name = Config::get("output");
-		// error_log("after read: " . self::$htdocs . json_encode(self::$htdocs->data));
-	}
-	static function pruneUnchanged () {
-		// remove any files from the tree that are older than their cached copy.
-	}
-	
-	static function pruneOutDated () {
-		// remove files in htdocs that are not in the cache.
 	}
 	
 	static function writeCache ($which = "") {
@@ -157,10 +153,6 @@ class Builder {
 	}
 	
 	static function write () {
-		// call renderers (templates, markup, etc.)
-		// write all the files from the data tree.
-		// Builder::make(array('writeCache'));
-		// error_log("writing ===>> " . json_encode(self::$htdocs->data));
 		FileTree::write(self::$htdocs);
 	}
 }
