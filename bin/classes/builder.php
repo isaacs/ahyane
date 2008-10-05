@@ -7,6 +7,8 @@ class Builder {
 	
 	public static function make ($argv = array()) {
 		error_log("Builder::make " . implode(" ", $argv));
+		self::config();
+		
 		if (empty($argv)) {
 			$argv = array('full');
 		}
@@ -22,7 +24,6 @@ class Builder {
 	}
 	
 	private static function emptyDir ($dir) {
-		$dir = dirname(__FILE__) . "/$dir/";
 		self::rm_recurse($dir);
 		mkdir($dir);
 	}
@@ -43,18 +44,16 @@ class Builder {
 		}
 		return @unlink($file);
 	}
-	
-	
-	
+		
 	private static function clean () {
-		self::emptyDir("cache");
+		self::emptyDir("bin/cache");
+		self::emptyDir(Config::get("output"));
 	}
 	private static function remove () {
-		self::emptyDir("../../htdocs");
+		self::rm_recurse(Config::get("output"));
 	}
 	private static function full () {
 		Builder::make(array(
-			'config',
 			'remove',
 			'read',
 			'parse',
@@ -66,13 +65,35 @@ class Builder {
 	private static function config () {
 		// first, freeze anything up to this point, most likely from command line.
 		Config::fixAll();
+		
+		// apply the default paths, just so there's something.
+		$paths = array("content"=>"content", "output"=>"htdocs", "template"=>"tpl");
+		Config::seta($paths);
+		
 		// now, load up the defaults in the ahyane basedir.
-		Config::read(AHYANE_BASEDIR . '/bin/.ahyaneconfig');
+		if ( !Config::read('.ahyaneconfig') ) {
+			trigger_error("Could not find .ahyaneconfig file in " . AHYANE_BASEDIR, E_USER_WARNING);
+		}
+		
+		Config::read( Config::get("content") . '/.ahyaneconfig' );
+		Config::read( Config::get("output") . '/.ahyaneconfig' );
+		Config::read( Config::get("template") . '/.ahyaneconfig' );
+		
+		// now, for all three, make sure that it's a valid folder!
+		foreach (
+			$paths as $k => $v
+		) if (
+			!realpath( Config::get($k) )
+		) if (
+			!mkdir( Config::get($k) )
+		) trigger_error(
+			"Path does not exist, could not be created: " . Config::get($k), E_USER_ERROR
+		);
 		
 	}
 	private static function showConfig () {
 		self::config();
-		var_dump(Config::getAll());
+		error_log( var_export(Config::getAll(), 1) );
 	}
 	
 	private static function parse () {
@@ -115,10 +136,10 @@ class Builder {
 	
 	// read in the content folder, and make the 
 	private static function read () {
-		self::$content = FileTree::read("content");
+		self::$content = FileTree::read(Config::get("content"));
 		// error_log("content: " . self::$content . json_encode(self::$content->data));
 		self::$htdocs = new ContentNode(self::$content->data);
-		self::$htdocs->name = "htdocs";
+		self::$htdocs->name = Config::get("output");
 		// error_log("after read: " . self::$htdocs . json_encode(self::$htdocs->data));
 	}
 	static function pruneUnchanged () {
