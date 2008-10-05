@@ -119,6 +119,7 @@ class Builder {
 		TW_HomePage::walk(self::$htdocs);
 		TW_DateArchive::walk(self::$htdocs);
 		TW_TagArchive::walk(self::$htdocs);
+		TW_Feed::walk(self::$htdocs);
 		TW_ArchiveSort::walk(self::$htdocs);
 		TW_Paginate::walk(self::$htdocs);
 	}

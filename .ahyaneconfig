@@ -38,3 +38,5 @@ ExcerptLength: 250
 # If not, or if it's missing, then it'll use the most recent blog posts.
 HomePage: home
 
+# usually "rss" or "feed" or something like that.
+FeedSlug: feed

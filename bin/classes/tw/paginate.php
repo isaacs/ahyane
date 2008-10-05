@@ -6,6 +6,12 @@ class TW_Paginate extends TW_Base {
 			!$node->header("archive")
 		) return;
 		
+		// paginated feeds is silly.
+		if ( $node->header("feed") ) {
+			$node->content->body = array_slice($node->content->body, 0, Config::get("maxperpage"));
+			return;
+		}
+		
 		$posts = $node->content->body;
 		$maxpages = ceil( count($posts) / Config::get("maxperpage") );
 		
