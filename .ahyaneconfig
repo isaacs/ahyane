@@ -42,7 +42,7 @@ HomePage: home
 FeedSlug: feed
 
 # if you want urls to start with something like "blog" or whatever, put it here.
-URLPrefix:
+URLPrefix: /ahyane/htdocs/
 
 SiteName: Ahyane
 SiteDescription: A CMS That Doesn't Suck
