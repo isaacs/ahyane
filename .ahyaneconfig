@@ -40,3 +40,16 @@ HomePage: home
 
 # usually "rss" or "feed" or something like that.
 FeedSlug: feed
+
+# if you want urls to start with something like "blog" or whatever, put it here.
+URLPrefix:
+
+SiteName: Ahyane
+SiteDescription: A CMS That Doesn't Suck
+
+# Put "%d" for the page number, ie, "Go to Page %d"
+# (It's used in an sprintf call.)
+NextPageText: « Older Posts
+PreviousPageText: Newer Posts »
+
+DefaultTitle: [untitled]
