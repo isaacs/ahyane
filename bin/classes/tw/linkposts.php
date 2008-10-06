@@ -14,7 +14,7 @@ class TW_LinkPosts extends TW_Base {
 	protected static function linkTo ($post) {
 		return to_object(array(
 			"href" => $post->header("permalink"),
-			"title" => $post->header("title", Config::get("DefaultTitle"));
+			"title" => $post->header("title", Config::get("DefaultTitle"))
 		));
 	}
 	
@@ -27,7 +27,7 @@ class TW_LinkPosts extends TW_Base {
 		if (
 			$node->header("type") !== "blog" ||
 			!$node->header("permalink")
-		) continue;
+		) return;
 		self::$posts[$node->header("date")] = $node;
 	}
 	
