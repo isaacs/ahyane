@@ -17,9 +17,9 @@
 				<p><?php echo $post->excerpt; ?></p>
 			</div>
 			<?php
-			echo "<pre>";
+			// echo "<pre>";
 			// print_r($post->headers);
-			echo "</pre>";
+			// echo "</pre>";
 		}
 		?>
 	</div>
