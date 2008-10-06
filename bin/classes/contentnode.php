@@ -23,7 +23,7 @@ class ContentNode implements Countable {
 	public function __get ($k) {
 		if (in_array($k, array(
 			// these have getter functions.
-			'parent', 'data', 'json', 'path', 'length', 'count', 'root'
+			'parent', 'data', 'json', 'path', 'length', 'count', 'root', 'href'
 		))) {
 			return $this->$k();
 		} else {
@@ -81,6 +81,10 @@ class ContentNode implements Countable {
 	public function template ($tpl) {
 		$node = $this;
 		require(Config::get("template") . "/$tpl");
+	}
+	
+	public function href () {
+		return Config::get("URLPrefix") . "/" . $this->path();
 	}
 	
 	public function header ($header, $else = null) {
