@@ -49,7 +49,7 @@ class Builder {
 	
 	private static function clean () {
 		self::emptyDir("bin/cache");
-		self::emptyDir(Config::get("output"));
+		self::remove();
 	}
 	private static function remove () {
 		foreach (
