@@ -62,3 +62,10 @@ DefaultTitle: [untitled]
 YearArchive: /Y/
 MonthArchive: /Y/m/
 DayArchive: /Y/m/d/
+
+YearArchiveTitle: Yearly Archives: %s 
+YearArchiveTitleDatePart: Y
+MonthArchiveTitle: Monthly Archives: %s 
+MonthArchiveTitleDatePart: F Y
+DayArchiveTitle: Daily Archives: 
+DayArchiveTitleDatePart: F dS, Y
