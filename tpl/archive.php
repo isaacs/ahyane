@@ -1,4 +1,4 @@
-<div class="archive" id="<?php echo str_replace('/', '-', $node->path) ?>">
+<div class="archive" id="archive<?php echo str_replace('/', '-', $node->path) ?>">
 	<div class="hd">
 		<h2><?php echo $node->header("title"); ?></h2>
 	</div>
@@ -7,14 +7,18 @@
 		foreach ($node->content->body as $post) {
 			?>
 			<div class="post" id="<?php
-				echo str_replace('/', '-', $post->headers->permalink);
+				echo $post->headers->slug;
 			?>">
 				<h3><a rel="bookmark" href="<?php
 					echo $post->headers->permalink;
 				?>"><?php
 					echo $post->headers->title;
 				?></a></h3>
-				<p><?php echo $post->excerpt; ?></p>
+				<?php echo $post->excerpt . '<a rel="bookmark" class="more" href="' .
+					$post->headers->permalink . '">' . sprintf(
+						Config::get("ReadMoreText"), $post->headers->title
+					) . '</a>';
+				?>
 			</div>
 			<?php
 			// echo "<pre>";
