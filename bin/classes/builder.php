@@ -146,6 +146,7 @@ class Builder {
 		
 		TW_Markdown::walk(self::$htdocs);
 		TW_ViewLayer::walk(self::$htdocs);
+		TW_ConfigTokens::walk(self::$htdocs);
 		TW_AddIndexFile::walk(self::$htdocs);
 	}
 	
