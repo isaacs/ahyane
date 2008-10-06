@@ -25,7 +25,7 @@ output: htdocs
 template: tpl
 
 # site stuff
-tagprefix: tag
+tagprefix: tag/
 # anything parseable by the php date() function, or %slug%
 Permalink: /Y/m/%slug%
 

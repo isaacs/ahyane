@@ -15,7 +15,7 @@ class TW_TagArchive extends TW_Base {
 			// $key is something like 2008/05/01
 			// $list is an array of node references.
 			
-			$result = $node->__(Config::get("tagprefix") . "/" . self::$tagsToSlugs[$tag], true);
+			$result = $node->__(Config::get("tagprefix") . self::$tagsToSlugs[$tag], true);
 			$result->content = to_object(array(
 				'headers' => array(
 					'archive' => true,
