@@ -84,7 +84,7 @@ class ContentNode implements Countable {
 	}
 	
 	public function href () {
-		return Config::get("URLPrefix") . "/" . $this->path();
+		return preg_replace('~/{2,}~', '/', Config::get("URLPrefix") . "/" . $this->path());
 	}
 	
 	public function header ($header, $else = null) {

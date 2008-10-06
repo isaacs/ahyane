@@ -36,11 +36,11 @@ class TW_Paginate extends TW_Base {
 	
 	protected static function link ($next, $previous) {
 		$next->content->headers->previous = to_object(array(
-			"href" => $previous->path,
+			"href" => $previous->href,
 			"title" => sprintf(Config::get("HigherPageText"), $previous->header("page"))
 		));
 		$previous->content->headers->next = to_object(array(
-			"href" => $next->path,
+			"href" => $next->href,
 			"title" => sprintf(Config::get("LowerPageText"), $next->header("page"))
 		));
 	}	

@@ -29,8 +29,10 @@ class TW_Permalinks extends TW_Base {
 	
 	protected static function each ($node) {
 		if (
-			is_object($node->content) && $node !== self::$root
-		) $node->path = $node->content->headers->permalink = self::getPermalink($node);
+			!is_object($node->content) || $node === self::$root
+		) return;
+		$node->path = self::getPermalink($node);
+		$node->content->headers->permalink = $node->href;
 	}
 	
 	public static function walk ($node) { parent::walk($node); }
