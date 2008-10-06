@@ -61,7 +61,9 @@ class TW_TagArchive extends TW_Base {
 		) self::$postsByTag[$tag] = array();
 		self::$postsByTag[$tag][] = $node;
 		unset($node->content->headers->tags[$numericindex]);
-		$node->content->headers->tags[self::$tagsToSlugs[$tag]] = $tag;
+		$node->content->headers->tags[
+			Config::get("tagprefix") . self::$tagsToSlugs[$tag]
+		] = $tag;
 	}
 	
 	protected static function each ($node) {
