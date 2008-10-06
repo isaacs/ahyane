@@ -16,7 +16,3 @@ class TW_ViewLayer extends TW_Base {
 	public static function walk ($node) { parent::walk($node); }
 }
 
-function template ($tpl) {
-	require(Config::get("template") . "/$tpl");
-}
-
