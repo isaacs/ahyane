@@ -48,18 +48,20 @@ class TW_TagArchive extends TW_Base {
 		
 		$i = 0;
 		$s = $slug;
-		while (
+		if (
 			in_array($slug, self::$tagsToSlugs)
-		) $slug = $s . ($i++);
+		) return array_search($slug, self::$tagsToSlugs);
 		self::$tagsToSlugs[ $tag ] = $slug;
 		return $tag;
 	}
 	
-	private static function addToTag ($tag, $node) {
+	private static function addToTag ($tag, $node, $numericindex) {
 		if (
 			!array_key_exists($tag, self::$postsByTag)
 		) self::$postsByTag[$tag] = array();
 		self::$postsByTag[$tag][] = $node;
+		unset($node->content->headers->tags[$numericindex]);
+		$node->content->headers->tags[self::$tagsToSlugs[$tag]] = $tag;
 	}
 	
 	protected static function each ($node) {
@@ -68,8 +70,8 @@ class TW_TagArchive extends TW_Base {
 			!is_array($node->header("tags"))
 		) return;
 		foreach (
-			$node->header("tags") as $tag
-		) self::addToTag(self::getTag($tag), $node);
+			$node->header("tags") as $i => $tag
+		) self::addToTag(self::getTag($tag), $node, $i);
 	}
 	
 	public static function walk ($node) { parent::walk($node); }
