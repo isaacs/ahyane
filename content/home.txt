@@ -4,5 +4,5 @@ slug: home
 
 Check us out <a href="http://github.com/isaacs/ahyane/tree/master">on github</a> or follow the progress <a href="http://twitter.com/ahyane">on twitter</a>.  More to come here later, hopefully.
 
-<img src="/butterfly.png" height="800" width="800" alt="butterfly">
+<img src="/tpl/butterfly.png" height="800" width="800" alt="butterfly">
 
