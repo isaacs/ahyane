@@ -6,7 +6,7 @@ class TW_ViewLayer extends TW_Base {
 		if ($node->content && is_object($node->content)) {
 			// $node->content = print_r($node->content, 1);
 			ob_start();
-			include(Config::get("template") . '/index.php');
+			require(Config::get("template") . '/index.php');
 			$node->content = ob_get_contents();
 			ob_end_clean();
 		} else {
@@ -14,5 +14,9 @@ class TW_ViewLayer extends TW_Base {
 		}
 	}
 	public static function walk ($node) { parent::walk($node); }
+}
+
+function template ($tpl) {
+	require(Config::get("template") . "/$tpl");
 }
 
