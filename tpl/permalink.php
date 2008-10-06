@@ -1,12 +1,12 @@
 <div class="post" id="post-<?php echo str_replace('/', '-', $node->path) ?>">
 	<div class="hd">
 		<?php
-		if ($node->tags) {
-			$tags = array();
-			foreach ($node->tags as $path => $tag) {
-				$tags = '<a rel="tag" href="' . $node->root->__($path)->href . '">' .
-					$tag . '</a>';
-			}
+		$tags = array();
+		foreach ($node->header("tags") as $path => $tag) {
+			$tags[] = '<a rel="tag" href="' . $node->root->__($path)->href . '">' .
+				$tag . '</a>';
+		}
+		if (!empty($tags)) {
 			echo '<ul class="tags"><li>' . implode('</li><li>', $tags) . '</li></ul>';
 		}
 		

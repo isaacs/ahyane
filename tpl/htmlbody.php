@@ -1,5 +1,5 @@
 <body>
-<div id="doc">
+<div id="doc2" class="yui-t6">
 <?php
 
 $node->template("head.php");
