@@ -20,7 +20,8 @@ class TW_TagArchive extends TW_Base {
 				'headers' => array(
 					'archive' => true,
 					'archivetype' => 'tag',
-					'tags' => array($tag)
+					'tag' => $tag,
+					'slug' => self::$tagsToSlugs[$tag]
 				),
 				'body' => array()
 			));
