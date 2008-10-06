@@ -1,5 +1,5 @@
 <?php
-class TW_LinkPages extends TW_Base {
+class TW_LinkPosts extends TW_Base {
 	private static $posts = array();
 	
 	protected static function finish ($node) {
