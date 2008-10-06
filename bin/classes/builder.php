@@ -117,6 +117,7 @@ class Builder {
 	
 	private static function archives () {
 		TW_HomePage::walk(self::$htdocs);
+		TW_LinkPosts::walk(self::$htdocs);
 		TW_DateArchive::walk(self::$htdocs);
 		TW_TagArchive::walk(self::$htdocs);
 		TW_Feed::walk(self::$htdocs);
