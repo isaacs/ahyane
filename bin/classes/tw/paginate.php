@@ -19,17 +19,31 @@ class TW_Paginate extends TW_Base {
 		$node->content->body = null; // just so the data copy in the loop will be faster.
 		$node->content->headers->page = 1;
 		
+		$previous = null;
 		for ($i = 1; $i <= $maxpages; $i ++) {
 			$p = $node->__(Config::get("pageprefix") . $i, true);
 			$p->content = to_object($node->content);
 			$p->content->headers->page = $i;
 			$p->content->body = array_slice($posts, $i - 1, Config::get("maxperpage"));
+			
+			if ($previous) self::link($p, $previous);
+			$previous = $p;
 		}
 		
 		// now make the root node === page/1
-		$node->content->body = $node->__(Config::get("pageprefix") . 1)->content->body;
-		
+		$node->content = $node->__(Config::get("pageprefix") . 1)->content;
 	}
+	
+	protected static function link ($next, $previous) {
+		$next->content->headers->previous = to_object(array(
+			"href" => $previous->path,
+			"title" => sprintf(Config::get("PreviousPageText"), $previous->header("page"))
+		));
+		$previous->content->headers->next = to_object(array(
+			"href" => $next->path,
+			"title" => sprintf(Config::get("NextPageText"), $next->header("page"))
+		));
+	}	
 	
 	public static function walk ($node) { parent::walk($node); }
 }

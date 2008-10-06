@@ -123,6 +123,7 @@ class Builder {
 		TW_Feed::walk(self::$htdocs);
 		TW_ArchiveSort::walk(self::$htdocs);
 		TW_Paginate::walk(self::$htdocs);
+		TW_LinkPages::walk(self::$htdocs);
 	}
 	
 	private static function urlify () {
