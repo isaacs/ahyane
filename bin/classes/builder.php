@@ -52,7 +52,16 @@ class Builder {
 		self::emptyDir(Config::get("output"));
 	}
 	private static function remove () {
-		self::rm_recurse(Config::get("output"));
+		foreach (
+			glob(Config::get("output")."/*") as $file
+		) if (
+			// only delete normal folders and index.html.
+			// Any other files or links (favicon, etc.) should remain.
+			!is_link($file) && (
+				$file === Config::get("output")."/index.html" ||
+				is_dir($file)
+			)
+		) self::rm_recurse($file);
 	}
 	private static function full () {
 		self::make(array(
