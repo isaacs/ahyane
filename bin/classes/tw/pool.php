@@ -5,6 +5,7 @@ class TW_Pool extends TW_Base {
 	
 	private static $pool;
 	private static $root;
+	private static $dates = array();
 	
 	protected static function start ($node) {
 		self::$pool = $node->child( new ContentNode( "___pool" ) );
@@ -41,6 +42,13 @@ class TW_Pool extends TW_Base {
 			$n = "$name-$i";
 			$i ++;
 		}
+		if (
+			$node->header("date")
+		) while (
+			in_array($node->header("date"), self::$dates)
+		) $node->content->headers->date ++;
+		self::$dates[] = $node->header("date");
+		
 		$node->path = "/___pool/$n";
 		$node->content->headers->slug = $n;
 	}
