@@ -136,6 +136,7 @@ class Builder {
 	}
 	
 	private static function urlify () {
+		TW_Markdown::walk(self::$htdocs);
 		TW_Excerpt::walk(self::$htdocs);
 		
 		self::make(array(
@@ -144,7 +145,6 @@ class Builder {
 			'archives'
 		));
 		
-		TW_Markdown::walk(self::$htdocs);
 		TW_ViewLayer::walk(self::$htdocs);
 		TW_ConfigTokens::walk(self::$htdocs);
 		TW_AddIndexFile::walk(self::$htdocs);
