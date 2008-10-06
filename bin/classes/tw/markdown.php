@@ -2,6 +2,9 @@
 
 class TW_Markdown extends TW_Base {
 	private static $parser = null;
+	protected static function start ($node) {
+		self::$parser = new Markdown_Parser;
+	}
 	protected static function each ($node) {
 		if (
 			!is_object($node->content) ||
@@ -11,10 +14,6 @@ class TW_Markdown extends TW_Base {
 				is_array($node->content->body)
 			)
 		) return;
-		
-		if (
-			!self::$parser
-		) self::$parser = new Markdown_Parser;
 		
 		if (
 			is_string($node->content->body)
