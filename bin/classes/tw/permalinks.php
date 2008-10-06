@@ -31,7 +31,7 @@ class TW_Permalinks extends TW_Base {
 		if (
 			!is_object($node->content) || $node === self::$root
 		) return;
-		$node->path = self::getPermalink($node);
+		$node->content->headers->path = $node->path = self::getPermalink($node);
 		$node->content->headers->permalink = $node->href;
 	}
 	
