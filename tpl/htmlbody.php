@@ -2,11 +2,11 @@
 <div id="doc">
 <?php
 
-template("head.php");
+$node->template("head.php");
 
-template("body.php");
+$node->template("body.php");
 
-template("foot.php");
+$node->template("foot.php");
 
 
 ?></div>

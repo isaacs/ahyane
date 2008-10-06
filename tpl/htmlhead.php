@@ -1,7 +1,7 @@
 <?php
 
 if (!$node->header("title")) {
-	template("title.php");
+	$node->template("title.php");
 }
 
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">

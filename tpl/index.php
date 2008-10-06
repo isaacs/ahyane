@@ -1,13 +1,13 @@
 <?php
 
 if ($node->header("feed")) {
-	template('feed.php');
+	$node->template('feed.php');
 	return;
 }
 
-template('htmlhead.php');
+$node->template('htmlhead.php');
 
-template('htmlbody.php');
+$node->template('htmlbody.php');
 
 
 

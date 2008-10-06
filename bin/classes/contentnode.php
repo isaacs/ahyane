@@ -78,6 +78,11 @@ class ContentNode implements Countable {
 		return $n;
 	}
 	
+	public function template ($tpl) {
+		$node = $this;
+		require(Config::get("template") . "/$tpl");
+	}
+	
 	public function header ($header, $else = null) {
 		return (
 			is_object($this->content) &&
