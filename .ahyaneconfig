@@ -69,3 +69,5 @@ MonthArchiveTitle: Monthly Archives: %s
 MonthArchiveTitleDatePart: F Y
 DayArchiveTitle: Daily Archives: 
 DayArchiveTitleDatePart: F dS, Y
+
+TagArchiveTitle: Tag Archives: %s

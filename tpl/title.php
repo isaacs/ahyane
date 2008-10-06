@@ -13,7 +13,9 @@ if (
 $type = $node->header("archivetype");
 if (
 	$type === "tag"
-) return $node->content->headers->title = sprintf(Config::get("TagTitle"), $node->header("tag"));
+) return $node->content->headers->title = sprintf(
+	Config::get("TagArchiveTitle"), $node->header("tag")
+);
 
 $node->content->headers->title = sprintf(
 	Config::get("${type}ArchiveTitle"), date(
