@@ -12,8 +12,8 @@
 			echo '<span>|</span>';
 		}
 		if ($node->header("next")) {
-			echo '<a class="previous" href="'. $node->header("previous")->href . '">' .
-				$node->header("previous")->title . '</a>';
+			echo '<a class="next" href="'. $node->header("next")->href . '">' .
+				$node->header("next")->title . '</a>';
 		}
 		echo '</div>';
 	}
