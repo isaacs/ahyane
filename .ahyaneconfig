@@ -30,7 +30,7 @@ tagprefix: tag
 Permalink: /Y/m/%slug%
 
 MaxPerPage: 5
-PagePrefix: page/
+PagePrefix: page-
 
 ExcerptLength: 250
 
@@ -49,7 +49,11 @@ SiteDescription: A CMS That Doesn't Suck
 
 # Put "%d" for the page number, ie, "Go to Page %d"
 # (It's used in an sprintf call.)
-NextPageText: « Older Posts
-PreviousPageText: Newer Posts »
+HigherPageText: « Older Posts
+LowerPageText: Newer Posts »
+
+# put "%s" for the post title, ie, "« %s (older)"
+OlderPostText: « %s
+NewerPostText: %s »
 
 DefaultTitle: [untitled]

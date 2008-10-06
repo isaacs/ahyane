@@ -11,16 +11,16 @@ class TW_LinkPosts extends TW_Base {
 		}
 	}
 	
-	protected static function linkTo ($post) {
+	protected static function linkTo ($post, $dir) {
 		return to_object(array(
 			"href" => $post->header("permalink"),
-			"title" => $post->header("title", Config::get("DefaultTitle"))
+			"title" => sprintf(Config::get($dir), $post->header("title", Config::get("DefaultTitle")))
 		));
 	}
 	
 	protected static function link ($next, $previous) {
-		$previous->content->headers->next = self::linkTo($next);
-		$next->content->headers->previous = self::linkTo($previous);
+		$previous->content->headers->next = self::linkTo($next, "NewerPostText");
+		$next->content->headers->previous = self::linkTo($previous, "OlderPostText");
 	}
 	
 	protected static function each ($node) {
