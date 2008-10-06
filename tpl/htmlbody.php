@@ -12,7 +12,7 @@ $node->template("foot.php");
 ?></div>
 <?php
 echo "<pre>";
-var_dump(str_replace("\t", "  ", htmlentities(print_r($node->content, 1))));
+var_dump($node->content);
 echo "</pre>";
 ?>
 </body>
