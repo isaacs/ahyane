@@ -57,3 +57,8 @@ OlderPostText: « %s
 NewerPostText: %s »
 
 DefaultTitle: [untitled]
+
+# Something that can be passed to the php date() function
+YearArchive: /Y/
+MonthArchive: /Y/m/
+DayArchive: /Y/m/d/

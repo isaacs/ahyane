@@ -15,9 +15,9 @@ class TW_DateArchive extends TW_Base {
 		
 		foreach (self::$postsByDate as $date => $post) {
 			foreach (array(
-				'Y' => 'year',
-				'Y/m' => 'month',
-				'Y/m/d' => 'day'
+				Config::get("yearArchive") => 'year',
+				Config::get("monthArchive") => 'month',
+				Config::get("dayArchive") => 'day'
 			) as $format => $datetype) {
 				$key = date($format, $date);
 				if (
@@ -35,7 +35,11 @@ class TW_DateArchive extends TW_Base {
 			$result = $node->__($key, true);
 			$result->content = to_object(array(
 				'headers' => array(
-					'archive' => true
+					'archive' => true,
+					'archivetype' => $kind,
+					'archivekey' => Config::get("${kind}archive"),
+					'archivestart' => $list[0]->content->headers->date,
+					'archiveend' => $list[ count($list) - 1 ]->content->headers->date
 				),
 				'body' => array()
 			));
@@ -54,6 +58,7 @@ class TW_DateArchive extends TW_Base {
 			!$node->header("permalink") ||
 			$node->header("type") === "static"
 		) return;
+		// TODO: Remove this! Dates already unique-ifed in TW_Pool
 		while (
 			array_key_exists($node->header("date"), self::$postsByDate)
 		) $node->content->headers->date ++;

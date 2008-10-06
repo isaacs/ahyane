@@ -19,6 +19,7 @@ class TW_TagArchive extends TW_Base {
 			$result->content = to_object(array(
 				'headers' => array(
 					'archive' => true,
+					'archivetype' => 'tag',
 					'tags' => array($tag)
 				),
 				'body' => array()
