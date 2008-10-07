@@ -42,10 +42,10 @@ HomePage: home
 FeedSlug: feed
 
 # if you want urls to start with something like "blog" or whatever, put it here.
-URLPrefix: /ahyane/htdocs/
+URLPrefix: 
 
 # the base url where the template will be accessible from.
-TemplateURL: /ahyane/tpl/
+TemplateURL: /tpl/
 
 SiteName: Ahyane
 SiteDescription: A CMS That Doesn't Suck
