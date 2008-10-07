@@ -1,4 +1,4 @@
-<div class="post" id="post-<?php echo str_replace('/', '-', $node->path) ?>">
+<div class="post" id="<?php echo $node->header("slug") ?>">
 	<div class="hd">
 		<?php
 		$tags = array();

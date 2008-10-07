@@ -45,10 +45,19 @@ class TW_DateArchive extends TW_Base {
 			));
 			foreach (
 				$list as $post
-			) $result->content->body[] = to_object($post->content);
+			) $result->content->body[] = self::copyContent($post->content);
 			
 		}
 	}
+	private static function copyContent ($content) {
+		$n = new stdClass();
+		$n->body = $content->body;
+		$n->headers = $content->headers;
+		$n->excerpt = $content->excerpt;
+		return $n;
+	}
+	
+	
 	protected static function start ($node) {
 		self::$postsByDate = array();
 	}

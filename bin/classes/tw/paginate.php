@@ -24,7 +24,9 @@ class TW_Paginate extends TW_Base {
 			$p = $node->__(Config::get("pageprefix") . $i, true);
 			$p->content = to_object($node->content);
 			$p->content->headers->page = $i;
-			$p->content->body = array_slice($posts, $i - 1, Config::get("maxperpage"));
+			$p->content->body = array_slice(
+				$posts, Config::get("maxperpage") * ($i - 1), Config::get("maxperpage")
+			);
 			
 			if ($previous) self::link($previous, $p);
 			$previous = $p;
