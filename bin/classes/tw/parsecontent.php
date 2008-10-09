@@ -37,6 +37,14 @@ class TW_ParseContent extends TW_Base {
 		return $tags;
 	}
 	
+	private static function getDate ($node) {
+		$d = strtotime($node->header("date"));
+		if (!$d) return $d;
+		if (date("His", $d) !== '000000') return $d;
+		$offset = explode(":", date("H:i:s", strtotime(Config::get("DefaultTime"))));
+		return $d + ( $offset[0] * 3600 + $offset[1] * 60 + $offset[2] );
+	}
+	
 	private static function getHeaders ($node) {
 		// get the slug
 		$node->content->headers->title = self::getTitle($node);
@@ -44,7 +52,7 @@ class TW_ParseContent extends TW_Base {
 		
 		$node->content->headers->tags = self::getTags($node);
 		
-		$node->content->headers->date = strtotime($node->header("date"));
+		$node->content->headers->date = self::getDate($node);
 		$node->content->headers->type = self::getType($node);
 		$node->content->headers->status = self::getStatus($node);
 		$node->content->headers->original = $node->path;

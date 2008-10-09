@@ -77,3 +77,8 @@ TagArchiveTitle: Tag Archives: %s
 ReadMoreText: Read More…
 
 SiteLanguage: en
+
+# If specified, all posts with a time of midnight will be given this time instead.
+# For example, if you use just a date, but no time, you might want your post to show up
+# at 10:00 instead of midnight.
+DefaultTime: 10:00:00
