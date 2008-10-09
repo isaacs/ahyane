@@ -14,11 +14,7 @@ class TW_ParseContent extends TW_Base {
 		);
 	}
 	private static function getSlug ($node) {
-		return $node->header("slug",
-			preg_replace('~[^a-zA-Z0-9%]+~', '-',
-				str_replace('%20', ' ', rawurlencode( strtolower( trim(self::getTitle($node)) ) ) )
-			)
-		);
+		return $node->header("slug", $node->slugify(self::getTitle($node)));
 	}
 	private static function getType ($node) {
 		return $node->header("type",

@@ -1,7 +1,5 @@
 <?php
 
-
-
 class ContentNode implements Countable {
 	// note: these are strictly internal.
 	// see __get and __set for exposed public members (not all of which exist, exactly)
@@ -83,6 +81,13 @@ class ContentNode implements Countable {
 		if ($buffer) ob_start();
 		require(Config::get("template") . "/$tpl");
 		if ($buffer) return ob_get_clean();
+	}
+	public function slugify ($str) {
+		return preg_replace(
+			'~[^a-zA-Z0-9]+~', '-', str_replace(
+				array('%20', '%'), array(' ', ''), rawurlencode(strtolower(trim($str)))
+			)
+		);
 	}
 	
 	private function url ($url) {
