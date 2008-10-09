@@ -85,11 +85,17 @@ class ContentNode implements Countable {
 		if ($buffer) return ob_get_clean();
 	}
 	
+	private function url ($url) {
+		$url = parse_url($url);
+		return (
+			array_key_exists('scheme', $url) ? $url['scheme'] . '://' . $url['host'] : ''
+		) . preg_replace('~/{2,}~', '/', $url['path']);
+	}
 	public function href () {
-		return preg_replace(
-			'~/{2,}~', '/', Config::get("URLPrefix") . "/" . $this->path()
-		) . (
-			false === strpos($this->name, ".") ? '/' : ''
+		return $this->url(
+			Config::get("URLPrefix") . '/' . $this->path() . (
+				false === strpos($this->name, ".") ? '/' : ''
+			)
 		);
 	}
 	
