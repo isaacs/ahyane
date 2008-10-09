@@ -49,6 +49,9 @@ SiteDescription: A CMS That Doesn't Suck
 # The url of the home page, also the URL prefix for any hrefs.
 SiteUrl: http://localhost/ahyane/htdocs/
 
+# If a post doesn't have an "author" header, it'll use this.
+DefaultAuthor: isaacs
+
 # Put "%d" for the page number, ie, "Go to Page %d"
 # (It's used in an sprintf call.)
 HigherPageText: « Older Posts

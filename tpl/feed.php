@@ -24,8 +24,7 @@
 			<!-- <comments>TODO: DISQUS URL</comments> -->
 
 			<pubDate><?php echo date('r', $post->headers->date); ?></pubDate>
-			<dc:creator><?php // TODO: Get author.
-			echo @$post->headers->author ?></dc:creator>
+			<dc:creator><?php echo $post->headers->author ?></dc:creator>
 			
 			<?php
 			foreach ($post->headers->tags as $tag) {

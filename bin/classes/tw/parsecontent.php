@@ -66,6 +66,9 @@ class TW_ParseContent extends TW_Base {
 			$node->content->headers->modified > @Config::get("LastModified")
 		) Config::set("LastModified", $node->content->headers->modified);
 		
+		if (
+			!property_exists($node->content->headers, "author")
+		) $node->content->headers->author = Config::get("DefaultAuthor");
 		
 		return $node->content->headers;
 	}
