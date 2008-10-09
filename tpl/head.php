@@ -1,6 +1,6 @@
 <div id="hd">
 	<h1><a href="<?php
-		echo Config::get("URLPrefix");
+		echo Config::get("SiteURL");
 	?>" rel="home"><?php
 		echo Config::get("SiteName");
 	?></a></h1>

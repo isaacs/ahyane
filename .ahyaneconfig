@@ -41,14 +41,13 @@ HomePage: home
 # usually "rss" or "feed" or something like that.
 FeedSlug: feed
 
-# if you want urls to start with something like "blog" or whatever, put it here.
-URLPrefix: /ahyane/htdocs/
-
 # the base url where the template will be accessible from.
 TemplateURL: /ahyane/tpl/
 
 SiteName: Ahyane
 SiteDescription: A CMS That Doesn't Suck
+# The url of the home page, also the URL prefix for any hrefs.
+SiteUrl: http://localhost/ahyane/htdocs/
 
 # Put "%d" for the page number, ie, "Go to Page %d"
 # (It's used in an sprintf call.)
@@ -76,3 +75,5 @@ DayArchiveTitleDatePart: F dS, Y
 TagArchiveTitle: Tag Archives: %s
 
 ReadMoreText: Read More…
+
+SiteLanguage: en

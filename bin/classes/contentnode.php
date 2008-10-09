@@ -93,7 +93,7 @@ class ContentNode implements Countable {
 	}
 	public function href () {
 		return $this->url(
-			Config::get("URLPrefix") . '/' . $this->path() . (
+			Config::get("SiteURL") . '/' . $this->path() . (
 				false === strpos($this->name, ".") ? '/' : ''
 			)
 		);

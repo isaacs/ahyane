@@ -7,17 +7,14 @@
 	>
 
 <channel>
-	<title><?php // TODO: Add to config
-	echo @Config::get('SiteName') ?></title>
+	<title><?php echo Config::get('SiteName') ?></title>
 	<atom:link href="<?php echo $node->href ?>" rel="self" type="application/rss+xml" />
-	<link><?php /// TODO: Add to config
-	echo @Config::get('SiteURL'); ?></link>
+	<link><?php echo Config::get('SiteURL'); ?></link>
 	<description><?php echo Config::get('SiteDescription') ?></description>
 	<pubDate><?php // TODO: Get most recent site change! ?></pubDate>
 
 	<generator>http://ahyane.com/</generator>
-	<language><?php // TODO: Add to config
-	echo @Config::get('SiteLanguage') ?></language>
+	<language><?php echo Config::get('SiteLanguage') ?></language>
 	<?php
 	foreach ($node->content->body as $post) {
 		?>
