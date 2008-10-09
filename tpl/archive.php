@@ -21,9 +21,9 @@
 				?>
 			</div>
 			<?php
-			echo "<pre>";
-			print_r($post->headers);
-			echo "</pre>";
+			// echo "<pre>";
+			// print_r($post->headers);
+			// echo "</pre>";
 		}
 		?>
 	</div>
