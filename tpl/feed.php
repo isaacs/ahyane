@@ -11,7 +11,7 @@
 	<atom:link href="<?php echo $node->href ?>" rel="self" type="application/rss+xml" />
 	<link><?php echo Config::get('SiteURL'); ?></link>
 	<description><?php echo Config::get('SiteDescription') ?></description>
-	<pubDate><?php // TODO: Get most recent site change! ?></pubDate>
+	<pubDate><?php echo date('r', Config::get("LastModified")) ?></pubDate>
 
 	<generator>http://ahyane.com/</generator>
 	<language><?php echo Config::get('SiteLanguage') ?></language>

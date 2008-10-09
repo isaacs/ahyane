@@ -57,11 +57,14 @@ class TW_ParseContent extends TW_Base {
 		$node->content->headers->status = self::getStatus($node);
 		$node->content->headers->original = $node->path;
 		
-		if (
+		$node->content->headers->modified = (
 			$filename = realpath(
 				AHYANE_BASEDIR . '/content' . $node->content->headers->original
 			)
-		) $node->content->headers->modified = filemtime($filename);
+		) ? filemtime($filename) : 0;
+		if (
+			$node->content->headers->modified > @Config::get("LastModified")
+		) Config::set("LastModified", $node->content->headers->modified);
 		
 		
 		return $node->content->headers;
