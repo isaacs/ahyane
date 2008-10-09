@@ -2,116 +2,42 @@ title: Todo
 tags: ahyane, todo, Brain Dump®
 type: static
 
-These are some of the things that need to be done.  This right here is an excerpt.
+These are some of the things that need to be done.  This right here is an excerpt. Neat!
 
 <!--more-->
 
 Left to do right now:
 
-1. <del>Finish up the posts-by-tags thing - abstract it into a general "archive by X" thingie. (Maybe something for author, etc?  What other metadata should be archiveable?) - Skip for now.</del>
-2. <del>sort all the archives descending by date. - done. TW_ArchiveSort</del>
-3. <del>paginate</del>
-4. <del>templates</del>
-5. <del>The default index and paginated blog posts (not by date, per se, just ordered)</del>
-6. Put titles on the archive pages.
-7. <del>Configuration – pull data out from being hard coded, and put it instead into a list of configs.  (See the "config" page, sibling of this one.)</del>
-8. Make it simple to wire up comments to Disqus.  See the "comments" page, sibling of this one.
-9. Keep blowing out the template stuff, to continue to expose data that needs to be gathered in the build step.  (Also, this is a fun creative FE design task.)
-10. Packaging – Once we have configurations that are more dynamic, figure out an easy way to have a few different sites that are built from a single /bin folder.  Also, work through all the oddities with Apache rules, so that setting up a new site isn't too strange.
-11. <del>Make the home page configurable</del>
-12. Search — Use google or yahoo to search the site.  Figure out a way to make that not suck.
-13. Hierarchical static pages.
+## Next Up
+
+1. Make it simple to wire up comments to Disqus.  See the "comments" page, sibling of this one.
+2. Keep blowing out the template stuff, to continue to expose data that needs to be gathered in the build step.  (Also, this is a fun creative FE design task.)
+3. Packaging – Once we have configurations that are more dynamic, figure out an easy way to have a few different sites that are built from a single /bin folder.  Also, work through all the oddities with Apache rules, so that setting up a new site isn't too strange.
+4. Search — Use google or yahoo to search the site.  Figure out a way to make that not suck.
+5. Hierarchical static pages with a "parent" header
+6. Create a single interface for "post" objects and "node" objects so that markup logic isn't repeated between archive and permalink pages. That's just awful. ContentNode should be the thing with template and content logic, and SiteNode should be a thing with the path/parent/child stuff, which contains either a single ContentNode or an array of them.  That way, a single post is a single item in memory until it's written out as a markup string, no matter how many places it is seen in.  Changes to the post change it everywhere, and it will make the dependency tree stuff more possible later on.
 
 
-The stuff below is all done already, but I didn't feel like throwing it away.  Some of it makes for pretty good documentation about how things work.
 
-## Simple Treewalkers
+## Bigger things
 
-These are "simple" because, for each one, they just perform some operation on the contents or the metadata, and nothing else.
-
-1. Treewalkers that basically must succeed for the build to work Should they modify the contents to "fix" any problems, or just bork out and die on any errors? Not sure.
-	1. read titles (default to "untitled entry" or some such?)
-	2. create url-slug data from title (ensure uniqueness)
-	
-2. Treewalkers that just do stuff to each node, but don't have to be too picky.
-	1. markdown transform — Forget all the others.  Textmate has incredibly good markdown support out of the box, and I like it.  Markdown wins.
-	2. excerpts — I'm thinking to just support the b2-style `<!--more-->`. It's worked well so far.  But it should also Just Work when you don't have that, pulling out hte first paragraph or 50 words or whatever.  Also, I'm thinking an explicit mechanism of defining an excerpt would be useful.
-	3. Post pagination?  Worth the effort?  b2, and thus Wordpress and b2evo, support `<!--nextpage-->` to break a single post up into pages.  I *never* use this feature.  Decision: Skip it.  If there's demand, it wouldn't be too hard, but not worth the bugginess of having extra transforms.
-	4. Walk over the parsed content pushing the node objects through the template to turn each URL into a full page.  This needs thinking.
-
-## Transforms that are currently impossible (tree-surgery, not just node mutation)
-
-These are going to require that we build out a new kind of tree transformation mechanism.  These would be a lot easier if the contentnode class supported adding/modifying things by path.  Need to do that.  Then you could just build out the extra nodes for these in just a few passes.
-
-In all of these, some metadata should be appended to the created nodes to specify what kind of thing it is.  Ie, is this a dated archive, page 2, year 2008, author isaacs, etc.
-
-1. Build out the date archives — Walk over the whole tree, creating a hash table of $datetime => $node. Then, when it's done, walk through this list, and create a new node for each date block that has a list of excerpts as the content.  So, if there were posts on 2008-01-08, 2008-02-01, and 2008-02-05, you'd have this:
-	`2008 : {
-		content : [excerpt, excerpt, excerpt...],
-		children : {
-			01 : {
-				content: [excerpt]
-				children : {
-					08 : {
-						content : [excerpt]
-					}
-				}
-			},
-			02 : {
-				content : [excerpt, excerpt],
-				children : {
-					01 : {
-						content : [excerpt]
-					},
-					05 : {
-						content : [excerpt]
-					}
-				}
-			}
-		}
-	}`
-	When this is urlified, it'll work out so that /2008 is all the posts in 2008, /2008/01 is all the posts in january of 2008, etc.
-
-2. Tag/category — I like category, and that's what Foohack uses, but some of the kids these days like to call them tags, and I'm all for calling things by shorter names that mean the same thing.
-
-3. Any other metadata? — Author, last-modified, ??
-
-4. Pagination — For all these lists of things, if they have more than N things, then put the first N things in their content, and blow out a "page" child node that has child nodes for each page.  So, if you have something like this:
-	`foo : {
-		content : [1,2,3,4,5,6,7,8,9,0]
-	}`
-	that would turn into something like this:
-	`foo : {
-		content : [1,2,3,4,5],
-		children : {
-			page : {
-				content : null,
-				children : {
-					1 : {
-						content : [1,2,3,4,5]
-					},
-					2 : {
-						content : [6,7,8,9,0]
-					}
-				}
-			}
-		}
-	}`
-
-## Phase 2
-
-1. Import from Wordpress
-2. Stuff to ping hackernews/digg/buzz/reddit/etc.
-3. Integrate with Disqus
+1. Dependency tree tracking, to enable incremental/partial builds and more accurate "last modified" dates on archive/feed pages.
+2. Import from Wordpress
+3. Stuff to ping hackernews/digg/buzz/reddit/etc.
 4. Documentation – It would be good if the build command had some kind of --help or some such.
 5. Write a set of shell scripts to do stuff, and a simple OSX app to wrap around them.
 
 
 
 
+## Done
 
 
-
-
-
-
+1. Finish up the posts-by-tags thing - abstract it into a general "archive by X" thingie. (Maybe something for author, etc?  What other metadata should be archiveable?) - Skip for now.
+2. sort all the archives descending by date. - done. TW_ArchiveSort
+3. paginate
+4. templates
+5. The default index and paginated blog posts (not by date, per se, just ordered)
+6. Put titles on the archive pages.
+7. Configuration – pull data out from being hard coded, and put it instead into a list of configs.  (See the "config" page, sibling of this one.)
+8. Make the home page configurable
