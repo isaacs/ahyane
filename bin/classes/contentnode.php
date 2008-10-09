@@ -90,15 +90,15 @@ class ContentNode implements Countable {
 		);
 	}
 	
-	private function url ($url) {
-		$url = parse_url($url);
+	public function urlify ($url) {
+		$url = parse_url(Config::get("SiteURL") . '/' . $url);
 		return (
 			array_key_exists('scheme', $url) ? $url['scheme'] . '://' . $url['host'] : ''
 		) . preg_replace('~/{2,}~', '/', $url['path']);
 	}
 	public function href () {
-		return $this->url(
-			Config::get("SiteURL") . '/' . $this->path() . (
+		return $this->urlify(
+			$this->path() . (
 				false === strpos($this->name, ".") ? '/' : ''
 			)
 		);
