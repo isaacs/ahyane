@@ -44,14 +44,13 @@ class TW_TagArchive extends TW_Base {
 		self::$postsByTag = array();
 	}
 	
-	private static function getTag ($tag) {
+	private static function getTag ($tag, $node) {
 		if (
 			array_key_exists($tag, self::$tagsToSlugs)
 		) return $tag;
 		
-		$slug = str_replace(" ", "-", 
-			strtolower(trim(preg_replace('~[^a-zA-Z0-9%]+~', ' ', $tag)))
-		);
+		$slug = $node->slugify($tag) . '/';
+		
 		if (!$slug) return;
 		
 		$i = 0;
@@ -81,7 +80,7 @@ class TW_TagArchive extends TW_Base {
 		) return;
 		foreach (
 			$node->header("tags") as $i => $tag
-		) self::addToTag(self::getTag($tag), $node, $i);
+		) self::addToTag(self::getTag($tag, $node), $node, $i);
 	}
 	
 	public static function walk ($node) { parent::walk($node); }
