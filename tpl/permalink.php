@@ -3,7 +3,7 @@
 		<?php
 		$tags = array();
 		foreach ($node->header("tags") as $path => $tag) {
-			$tags[] = '<a rel="tag" href="' . $node->root->__($path)->href . '">' .
+			$tags[] = '<a rel="tag" href="' . $node->urlify($path) . '">' .
 				$tag . '</a>';
 		}
 		if (!empty($tags)) {
@@ -12,6 +12,16 @@
 		
 		// now the title of the post or page or whatever.
 		echo '<h2>' . $node->header("title") . '</h2>';
+		
+		echo '<ul class="meta">' .
+			( $node->header("date")
+				? '<li class="published"><span name="value" style="display:none">' .
+					$node->header("date") . '</span>' .
+					date('r', $node->header("date")) . '</li>'
+				: ''
+			) .
+			'<li class="author">By ' . $node->header("author") . '</li>' . 
+			'</ul>';
 		?>
 	</div>
 	<div class="bd">
