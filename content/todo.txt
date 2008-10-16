@@ -15,7 +15,7 @@ Left to do right now:
 3. Packaging – Once we have configurations that are more dynamic, figure out an easy way to have a few different sites that are built from a single /bin folder.  Also, work through all the oddities with Apache rules, so that setting up a new site isn't too strange.
 4. Search — Use google or yahoo to search the site.  Figure out a way to make that not suck.
 5. Hierarchical static pages with a "parent" header
-6. Create a single interface for "post" objects and "node" objects so that markup logic isn't repeated between archive and permalink pages. That's just awful. ContentNode should be the thing with template and content logic, and SiteNode should be a thing with the path/parent/child stuff, which contains either a single ContentNode or an array of them.  That way, a single post is a single item in memory until it's written out as a markup string, no matter how many places it is seen in.  Changes to the post change it everywhere, and it will make the dependency tree stuff more possible later on.
+6. Create a single interface for "post" objects and "node" objects so that markup logic isn't repeated between archive and permalink pages. That's just awful. ContentNode should be the thing with template and content logic, and PathNode should be a thing with the path/parent/child stuff, which contains either a single ContentNode or an array of them.  That way, a single post is a single item in memory until it's written out as a markup string, no matter how many places it is seen in.  Changes to the post change it everywhere, and it will make the dependency tree stuff more possible later on.
 
 
 
