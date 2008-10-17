@@ -16,10 +16,6 @@
 	<generator>http://ahyane.com/</generator>
 	<language><?php echo Config::get('SiteLanguage') ?></language>
 	<?php
-	if (!is_array($node->body)) {
-		var_dump($node->headers);
-		die();
-	}
 	foreach ($node->body as $post) {
 		?>
 		<item>
