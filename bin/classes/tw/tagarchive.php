@@ -7,21 +7,15 @@ class TW_TagArchive extends TW_Base {
 	
 	protected static function finish ($node) {
 		// now we have the full list of posts indexed by tags, and their slugs.
-		// walk through it, putting excerpts at the right places.
-		
-		// now we have arrays of posts.
-		// turn into new thing with lists of miniposts?
 		foreach (
 			self::$postsByTag as $tag => $list
 		) if (
 			$tag && count($list) > 0
 		) {
-			// $key is something like 2008/05/01
-			// $list is an array of node references.
-			
+
 			$result = $node->__(Config::get("tagprefix") . self::$tagsToSlugs[$tag], true);
 			$result->body = array();
-			$node->setHeader(array(
+			$result->setHeader(array(
 				'archive' => true,
 				'archivetype' => 'tag',
 				'tag' => $tag,
@@ -31,7 +25,6 @@ class TW_TagArchive extends TW_Base {
 			foreach (
 				$list as $post
 			) $result->body[] = new ContentNode($post->data);
-			
 		}
 	}
 	
