@@ -4,31 +4,32 @@
 	</div>
 	<div class="bd">
 		<?php
+
 		foreach ($node->body as $post) {
 			?>
 			<div class="<?php
 			$classes = array(
 				'post hentry',
-				'author-' . slugify($post->headers->author),
-				slugify($post->headers->status),
-				'y' . date('Y', $post->headers->date),
-				'm' . date('m', $post->headers->date),
-				'd' . date('d', $post->headers->date),
-				'h' . date('H', $post->headers->date)
+				'author-' . slugify($post->author),
+				slugify($post->status),
+				'y' . date('Y', $post->date),
+				'm' . date('m', $post->date),
+				'd' . date('d', $post->date),
+				'h' . date('H', $post->date)
 			);
-			foreach ($post->headers->tags as $tag) {
+			foreach ($post->tags as $tag) {
 				$classes[] = 'tag-' . slugify($tag);
 			}
 			echo join(" ", $classes);
 			?>" id="<?php
-				echo $post->headers->slug;
+				echo $post->slug;
 			?>">
 				<?php
-				if (!empty($post->headers->tags)) {
+				if (!empty($post->tags)) {
 					?>
 					<ul class="tags">
 						<?php
-						foreach ($post->headers->tags as $url => $tag) {
+						foreach ($post->tags as $url => $tag) {
 							echo "\n" . '<li><a rel="tag" href="' .
 								urlify($url) . '">' . $tag . '</a></li>';
 						}
@@ -38,13 +39,13 @@
 				}
 				?>
 				<h3><a rel="bookmark" href="<?php
-					echo $post->headers->permalink;
+					echo $post->permalink;
 				?>"><?php
-					echo $post->headers->title;
+					echo $post->title;
 				?></a></h3>
 				<?php echo $post->excerpt . '<a rel="bookmark" class="more" href="' .
-					$post->headers->permalink . '">' . sprintf(
-						Config::get("ReadMoreText"), $post->headers->title
+					$post->permalink . '">' . sprintf(
+						Config::get("ReadMoreText"), $post->title
 					) . '</a>';
 				?>
 			</div>
