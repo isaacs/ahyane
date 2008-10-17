@@ -19,8 +19,8 @@ class TW_LinkPosts extends TW_Base {
 	}
 	
 	protected static function link ($next, $previous) {
-		$previous->content->headers->next = self::linkTo($next, "NewerPostText");
-		$next->content->headers->previous = self::linkTo($previous, "OlderPostText");
+		$previous->next = self::linkTo($next, "NewerPostText");
+		$next->previous = self::linkTo($previous, "OlderPostText");
 	}
 	
 	protected static function each ($node) {

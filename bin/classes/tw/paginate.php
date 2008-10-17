@@ -3,28 +3,32 @@
 class TW_Paginate extends TW_Base {
 	protected static function each ($node) {
 		if (
-			!$node->header("archive")
+			!$node->header("archive") ||
+			!is_array($node->body)
 		) return;
 		
 		// paginated feeds is silly.
+		// just show the first page always.
 		if ( $node->header("feed") ) {
-			$node->content->body = array_slice($node->content->body, 0, Config::get("maxperpage"));
+			$node->body = array_slice($node->body, 0, Config::get("maxperpage"));
 			return;
 		}
 		
-		$posts = $node->content->body;
+		$posts = $node->body;
 		$maxpages = ceil( count($posts) / Config::get("maxperpage") );
 		
-		$node->content->headers->pagecount = $maxpages;
-		$node->content->body = null; // just so the data copy in the loop will be faster.
-		$node->content->headers->page = 1;
+		$node->pagecount = $maxpages;
+		$node->body = null; // just so the data copy in the loop will be faster.
+		$node->headers->page = 1;
 		
 		$previous = null;
 		for ($i = 1; $i <= $maxpages; $i ++) {
 			$p = $node->__(Config::get("pageprefix") . $i, true);
-			$p->content = to_object($node->content);
-			$p->content->headers->page = $i;
-			$p->content->body = array_slice(
+			
+			$p->setHeader($node->content->headers);
+			$p->page = $i;
+			
+			$p->body = array_slice(
 				$posts, Config::get("maxperpage") * ($i - 1), Config::get("maxperpage")
 			);
 			
@@ -32,18 +36,18 @@ class TW_Paginate extends TW_Base {
 			$previous = $p;
 		}
 		
-		// now make the root node === page/1
+		// now make the root node === page-1
 		$node->content = $node->__(Config::get("pageprefix") . 1)->content;
 	}
 	
 	protected static function link ($next, $previous) {
-		$next->content->headers->previous = to_object(array(
+		$next->previous = to_object(array(
 			"href" => $previous->href,
-			"title" => sprintf(Config::get("HigherPageText"), $previous->header("page"))
+			"title" => sprintf(Config::get("HigherPageText"), $previous->page)
 		));
-		$previous->content->headers->next = to_object(array(
+		$previous->next = to_object(array(
 			"href" => $next->href,
-			"title" => sprintf(Config::get("LowerPageText"), $next->header("page"))
+			"title" => sprintf(Config::get("LowerPageText"), $next->page)
 		));
 	}	
 	

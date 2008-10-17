@@ -31,3 +31,18 @@ spl_autoload_register('ahyane_autoloader');
 function to_object ($x) {
 	return (is_object($x) || is_array($x)) ? (object)json_decode(json_encode($x)) : (object) $x;
 }
+
+function urlify ($url) {
+	$url = parse_url(Config::get("SiteURL") . '/' . $url);
+	return (
+		array_key_exists('scheme', $url) ? $url['scheme'] . '://' . $url['host'] : ''
+	) . preg_replace('~/{2,}~', '/', $url['path']);
+}
+
+function slugify ($str) {
+	return preg_replace(
+		'~[^a-zA-Z0-9]+~', '-', str_replace(
+			array('%20', '%'), array(' ', ''), rawurlencode(strtolower(trim($str)))
+		)
+	);
+}

@@ -8,8 +8,7 @@ class TW_Pool extends TW_Base {
 	private static $dates = array();
 	
 	protected static function start ($node) {
-		self::$pool = $node->child( new ContentNode( "___pool" ) );
-		self::$pool->content = "___pool";
+		self::$pool = $node->child( new PathNode( "___pool" ) );
 		self::$root = $node;
 	}
 	protected static function finish ($node) {
@@ -28,29 +27,25 @@ class TW_Pool extends TW_Base {
 		if (
 			$node === self::$root ||
 			$node === self::$pool ||
-			!(
-				is_object($node->content) &&
-				property_exists($node->content, "body") &&
-				$node->content->body
-			)
+			!$node->body
 		) return;
 		
 		$name = $n = $node->header("slug", $node->name);
 		$i = 2;
 		// make sure it's unique.
-		while ( self::$pool->_($n) ) {
-			$n = "$name-$i";
-			$i ++;
-		}
+		while (
+			self::$pool->_($n)
+		) $n = "$name-" . ($i ++);
+		
 		if (
-			$node->header("date")
+			$node->date
 		) while (
-			in_array($node->header("date"), self::$dates)
-		) $node->content->headers->date ++;
-		self::$dates[] = $node->header("date");
+			in_array($node->date, self::$dates)
+		) $node->date ++;
+		self::$dates[] = $node->date;
 		
 		$node->path = "/___pool/$n";
-		$node->content->headers->slug = $n;
+		$node->slug = $n;
 	}
 	
 	public static function walk ($node) { parent::walk($node); }

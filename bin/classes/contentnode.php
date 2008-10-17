@@ -1,79 +1,68 @@
 <?php
 
-class ContentNode implements Countable {
-	// note: these are strictly internal.
-	// see __get and __set for exposed public members (not all of which exist, exactly)
-	public $content = null;
-
-	private $name = "";
-	private $children = null;
-	private $parent = null;
+class ContentNode {
 	
-	public function __construct ($name) {
-		$this->children = new stdClass();
-		if (is_a($name, 'stdClass')) {
-			$this->data($name);
-		} else {
-			$this->name = $name;
-		}
-	}
+	private $headers = null;
+	public $body = null;
+	public $excerpt = null;
 	
-	public function __get ($k) {
-		if (in_array($k, array(
-			// these have getter functions.
-			'parent', 'data', 'json', 'path', 'length', 'count', 'root', 'href'
-		))) {
-			return $this->$k();
-		} else {
-			return $this->$k;
-		}
-	}
-	public function __set ($k, $v) {
-		if (in_array($k, array(
-			// these have setter functions.
-			'name', 'data', 'json', 'parent', 'path'
-		))) {
-			return $this->$k($v);
-		}	else {
-			trigger_error("Access to ContentNode::\$$k restricted", E_USER_ERROR);
-		}
-	}
-	public function __toString () {
-		return '[ContentNode] '. $this->name;
-	}
+	private static $pseudoMembers = array( 'json', 'data' );
+	private static $realMembers = array( 'body', 'excerpt' );
 	
-	// just a handy syntax for grabbing a direct child by name.
-	public function _ ($name, $create = false) {
-		// error_log("getting child [$name] from $this->name");
-		// error_log(var_dump(array_keys($this->children), 1));
-		// 
+	public function __construct ($data = null) {
+		$this->headers = new stdClass();
+		if ($data) $this->data($data);
+	}
+	public function setHeader ($key, $val = null) {
+		if (
+			$val === null &&
+			(is_array($key) || is_object($key))
+		) foreach (
+			$key as $k => $v
+		) $this->set($k, $v);
+		elseif (
+			is_string($key)
+		) $this->headers->$key = $val;
+		return $val;
+	}
+	public function __set ($key, $val) {
+		return $this->set($key, $val);
+	}
+	protected function set ($key, $val) {
+		// if (is_string($key) && is_string($val)) {
+		// 	error_log("set $key $val");
+		// } else {
+		// 	error_log("problem? $key = ".json_encode($key)." val=".json_encode($val));
+		// }
 		
-		if (is_string($name) && property_exists($this->children, $name)) {
-			return $this->children->$name;
-		} elseif (is_object($name) && property_exists($this->chilren, $name->name)) {
-			$name = $name->name;
-			return $this->children->$name;
-		} elseif ($create) {
-			return $this->child( new ContentNode($name) );
-		} else {
-			return null;
-		}
+		//
+		if (
+			in_array($key, self::$pseudoMembers)
+		) return $this->$key($val);
+		
+		if (
+			in_array($key, self::$realMembers)
+		) return $this->$key = $val;
+		
+		if (
+			$key === "headers"
+		) return $this->setHeader($val);
+		
+		return $this->setHeader($key, $val);
 	}
-	
-	public function __ ($path, $create = false) {
-		$n = $this;
-		foreach (
-			explode("/", $path) as $p
-		) if (!$n) {
-			break;
-		} elseif ($p === '.' || $p === '') {
-			continue;
-		} elseif ($p === '..') {
-			$n = $n->parent;
-		} else {
-			$n = $n->_($p, $create);
-		}
-		return $n;
+	public function __get ($key) {
+		return $this->get($key);
+	}
+	protected function get ($key) {
+		if (
+			in_array($key, self::$pseudoMembers)
+		) return $this->$key();
+		
+		if (
+			$key === "headers"
+		) return to_object($this->headers);
+		
+		return $this->header($key);
 	}
 	
 	public function template ($tpl, $buffer = false) {
@@ -82,148 +71,33 @@ class ContentNode implements Countable {
 		require(Config::get("template") . "/$tpl");
 		if ($buffer) return ob_get_clean();
 	}
-	public function slugify ($str) {
-		return preg_replace(
-			'~[^a-zA-Z0-9]+~', '-', str_replace(
-				array('%20', '%'), array(' ', ''), rawurlencode(strtolower(trim($str)))
-			)
-		);
-	}
-	
-	public function urlify ($url) {
-		$url = parse_url(Config::get("SiteURL") . '/' . $url);
-		return (
-			array_key_exists('scheme', $url) ? $url['scheme'] . '://' . $url['host'] : ''
-		) . preg_replace('~/{2,}~', '/', $url['path']);
-	}
-	public function href () {
-		return $this->urlify(
-			$this->path() . (
-				false === strpos($this->name, ".") ? '/' : ''
-			)
-		);
-	}
-	
+
 	public function header ($header, $else = null) {
+		if (!$this->headers) {
+			error_log("no headers! " . $this->json);
+			die();
+		}
 		return (
-			is_object($this->content) &&
-			property_exists($this->content, "headers") &&
-			is_object($this->content->headers) &&
-			property_exists($this->content->headers, $header)
-		) ? $this->content->headers->$header : $else;
+			property_exists($this->headers, $header)
+		) ? $this->headers->$header : $else;
 	}
 	
-	private function json ($json = "") {
-		$j = json_decode($json);
-		if ($j === null) {
-			// get
-			return json_encode($this->data());
-		} else {
-			// set
-			$this->data($j);
-			return $json;
-		}
+	protected function json ($json = "") {
+		if (
+			$json = json_decode($json)
+		) return json_encode($this->data($json));
+		return json_encode($this->data());
 	}
-	private function data ($data = null) {
-		if ($data === null) {
-			// get
-			$data = new stdClass();
-			$data->name = $this->name;
-			$data->content = $this->content;
-			if (count(get_object_vars($this->children)) > 0) {
-				$data->children = new stdClass();
-				foreach ($this->children as $child) {
-					$data->children->{$child->name} = $child->data();
-				}
-			}
-		} else {
-			// set
-			$this->name($data->name);
-			$this->content = $data->content;
-			if (property_exists($data, "children")) {
-				foreach ($data->children as $child) {
-					$this->child($child);
-				}
-			}
-		}
+	protected function data ($data = null) {
+		$data = (object)$data;
+		foreach (
+			array('excerpt', 'body', 'headers') as $thingie
+		) if (
+			property_exists($data, $thingie)
+		) $this->set($thingie, $data->$thingie);
+		else $data->$thingie = $this->$thingie;
 		return $data;
 	}
-	private function name ($name) {
-		$this->name = $name;
-		if ($this->parent) {
-			$this->parent->rollCall();
-		}
-		return $name;
-	}
-	public function child ($child) {
-		// error_log("child ".$this . ' ' . $child);
-		
-		if (is_a($child, get_class($this))) {
-			$k = $child;
-		} else {
-			$k = new self($child);
-		}
-		if (property_exists($this->children, $k->name)) {
-			$this->remove($this->_($k->name));
-		}
-		if ($this !== $k->parent) {
-			$k->parent($this);
-		}
-		$this->children->{$k->name} = $k;
-		return $child;
-	}
-	public function remove ($child) {
-		if (is_a($child, get_class($this))) {
-			$n = $child->name;
-		} else {
-			$n = $child;
-		}
-		if (property_exists($this->children, $n)) {
-			unset($this->children->$n);
-		}
-		return $child;
-	}
-	public function rollCall () {
-		foreach ($this->children as $name => $child) if ($name !== $child->name) {
-			unset( $this->children->$name );
-			$this->children->{$child->name} = $child;
-		}
-	}
-	private function parent ($parent = false) {
-		if ($parent === false ) {
-			return $this->parent;
-		} elseif ($parent !== $this->parent) {
-			if ($this->parent) {
-				// moving from another location, sever ties.
-				$this->parent->remove($this);
-			}
-			$this->parent = $parent;
-			$parent->child($this);
-		}
-		return $parent;
-	}
 	
-	private function root () {
-		for ($r = $n = $this; $n = $n->parent(); $r = $n);
-		return $r;
-	}
-	
-	private function path ($newpath = null) {
-		if (!is_string($newpath)) {
-			return (
-				$this->parent && $this->parent->parent ? $this->parent->path() : ''
-			) . '/'  . $this->name;
-		}
-		$newpath = explode("/", $newpath);
-		$this->name(array_pop($newpath));
-		$newpath = implode("/", $newpath);
-		$this->parent( $this->root()->__($newpath, true) );
-		return $this->path();
-	}
-	public function count () {
-		return $this->length();
-	}
-	private function length () {
-		return count(get_object_vars($this->children));
-	}
 }
+

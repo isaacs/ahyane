@@ -11,32 +11,28 @@ class TW_TagArchive extends TW_Base {
 		
 		// now we have arrays of posts.
 		// turn into new thing with lists of miniposts?
-		foreach (self::$postsByTag as $tag => $list) if ($tag && count($list) > 0) {
+		foreach (
+			self::$postsByTag as $tag => $list
+		) if (
+			$tag && count($list) > 0
+		) {
 			// $key is something like 2008/05/01
 			// $list is an array of node references.
 			
 			$result = $node->__(Config::get("tagprefix") . self::$tagsToSlugs[$tag], true);
-			$result->content = to_object(array(
-				'headers' => array(
-					'archive' => true,
-					'archivetype' => 'tag',
-					'tag' => $tag,
-					'slug' => self::$tagsToSlugs[$tag]
-				),
-				'body' => array()
+			$result->body = array();
+			$node->setHeader(array(
+				'archive' => true,
+				'archivetype' => 'tag',
+				'tag' => $tag,
+				'slug' => self::$tagsToSlugs[$tag]
 			));
+			
 			foreach (
 				$list as $post
-			) $result->content->body[] = self::copyContent($post->content);
+			) $result->body[] = new ContentNode($post->data);
 			
 		}
-	}
-	private static function copyContent ($content) {
-		$n = new stdClass();
-		$n->body = $content->body;
-		$n->headers = $content->headers;
-		$n->excerpt = $content->excerpt;
-		return $n;
 	}
 	
 	protected static function start ($node) {
@@ -49,7 +45,7 @@ class TW_TagArchive extends TW_Base {
 			array_key_exists($tag, self::$tagsToSlugs)
 		) return $tag;
 		
-		$slug = $node->slugify($tag) . '/';
+		$slug = slugify($tag) . '/';
 		
 		if (!$slug) return;
 		
@@ -67,16 +63,19 @@ class TW_TagArchive extends TW_Base {
 			!array_key_exists($tag, self::$postsByTag)
 		) self::$postsByTag[$tag] = array();
 		self::$postsByTag[$tag][] = $node;
-		unset($node->content->headers->tags[$numericindex]);
-		$node->content->headers->tags[
+		
+		// NB: You can't use the [] operator on things with special setter/getters
+		$tags = $node->tags;
+		unset($tags[$numericindex]);
+		$tags[
 			Config::get("tagprefix") . self::$tagsToSlugs[$tag]
 		] = $tag;
+		$node->tags = $tags;
 	}
 	
 	protected static function each ($node) {
 		if (
-			!$node->header("tags") ||
-			!is_array($node->header("tags"))
+			!$node->tags || !is_array($node->tags)
 		) return;
 		foreach (
 			$node->header("tags") as $i => $tag

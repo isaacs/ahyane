@@ -33,30 +33,21 @@ class TW_DateArchive extends TW_Base {
 			// $key is something like 2008/05/01
 			// $list is an array of node references.
 			$result = $node->__($key, true);
-			$result->content = to_object(array(
-				'headers' => array(
-					'archive' => true,
-					'archivetype' => $kind,
-					'archivekey' => Config::get("${kind}archive"),
-					'archivestart' => $list[0]->content->headers->date,
-					'archiveend' => $list[ count($list) - 1 ]->content->headers->date
-				),
-				'body' => array()
+			$result->setHeader(array(
+				'archive' => true,
+				'archivetype' => $kind,
+				'archivekey' => Config::get("${kind}archive"),
+				'archivestart' => $list[0]->date,
+				'archiveend' => $list[ count($list) - 1 ]->date
 			));
+			$result->body = array();
+			
 			foreach (
 				$list as $post
-			) $result->content->body[] = self::copyContent($post->content);
+			) $result->body[] = new ContentNode($post->data);
 			
 		}
-	}
-	private static function copyContent ($content) {
-		$n = new stdClass();
-		$n->body = $content->body;
-		$n->headers = $content->headers;
-		$n->excerpt = $content->excerpt;
-		return $n;
-	}
-	
+	}	
 	
 	protected static function start ($node) {
 		self::$postsByDate = array();
@@ -68,10 +59,10 @@ class TW_DateArchive extends TW_Base {
 			$node->header("type") === "static"
 		) return;
 		// TODO: Remove this! Dates already unique-ifed in TW_Pool
-		while (
-			array_key_exists($node->header("date"), self::$postsByDate)
-		) $node->content->headers->date ++;
-		self::$postsByDate[ $node->header("date") ] = $node;
+		// while (
+		// 	array_key_exists($node->date, self::$postsByDate)
+		// ) $node->date ++;
+		self::$postsByDate[ $node->date ] = $node;
 	}
 	
 	public static function walk ($node) { parent::walk($node); }

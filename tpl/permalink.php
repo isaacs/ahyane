@@ -3,7 +3,7 @@
 		<?php
 		$tags = array();
 		foreach ($node->header("tags") as $path => $tag) {
-			$tags[] = '<a rel="tag" href="' . $node->urlify($path) . '">' .
+			$tags[] = '<a rel="tag" href="' . urlify($path) . '">' .
 				$tag . '</a>';
 		}
 		if (!empty($tags)) {

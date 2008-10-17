@@ -12,7 +12,7 @@ $node->template("foot.php");
 ?></div>
 <?php
 echo "<div id=debug><pre>";
-var_dump($node->content->headers);
+var_dump($node->headers);
 echo "</pre></div>";
 ?>
 </body>

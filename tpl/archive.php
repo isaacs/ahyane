@@ -4,20 +4,20 @@
 	</div>
 	<div class="bd">
 		<?php
-		foreach ($node->content->body as $post) {
+		foreach ($node->body as $post) {
 			?>
 			<div class="<?php
 			$classes = array(
 				'post hentry',
-				'author-' . $node->slugify($post->headers->author),
-				$node->slugify($post->headers->status),
+				'author-' . slugify($post->headers->author),
+				slugify($post->headers->status),
 				'y' . date('Y', $post->headers->date),
 				'm' . date('m', $post->headers->date),
 				'd' . date('d', $post->headers->date),
 				'h' . date('H', $post->headers->date)
 			);
 			foreach ($post->headers->tags as $tag) {
-				$classes[] = 'tag-' . $node->slugify($tag);
+				$classes[] = 'tag-' . slugify($tag);
 			}
 			echo join(" ", $classes);
 			?>" id="<?php
@@ -30,7 +30,7 @@
 						<?php
 						foreach ($post->headers->tags as $url => $tag) {
 							echo "\n" . '<li><a rel="tag" href="' .
-								$node->urlify($url) . '">' . $tag . '</a></li>';
+								urlify($url) . '">' . $tag . '</a></li>';
 						}
 						?>
 					</ul>

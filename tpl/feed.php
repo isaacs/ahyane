@@ -16,7 +16,11 @@
 	<generator>http://ahyane.com/</generator>
 	<language><?php echo Config::get('SiteLanguage') ?></language>
 	<?php
-	foreach ($node->content->body as $post) {
+	if (!is_array($node->body)) {
+		var_dump($node->headers);
+		die();
+	}
+	foreach ($node->body as $post) {
 		?>
 		<item>
 			<title><?php echo $post->headers->title ?></title>

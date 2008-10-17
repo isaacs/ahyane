@@ -7,20 +7,15 @@ class TW_Markdown extends TW_Base {
 	}
 	protected static function each ($node) {
 		if (
-			!is_object($node->content) ||
-			!property_exists($node->content, "body") ||
-			!(
-				is_string($node->content->body) ||
-				is_array($node->content->body)
-			)
+			!is_string($node->body) && !is_array($node->body)
 		) return;
 		
 		if (
-			is_string($node->content->body)
-		) $node->content->body = self::$parser->transform($node->content->body);
+			is_string($node->body)
+		) $node->body = self::$parser->transform($node->body);
 		else foreach (
-			$node->content->body as $key => $post
-		) $node->content->body[$key]->body = self::$parser->transform($post->body);
+			$node->body as $key => $post
+		) $node->body[$key]->body = self::$parser->transform($post->body);
 	}
 	public static function walk ($node) { parent::walk($node); }
 }

@@ -68,6 +68,7 @@ class Builder {
 			'remove',
 			'read',
 			'parse',
+			// 'display',
 			'urlify',
 			'write'
 		));
@@ -154,10 +155,11 @@ class Builder {
 		echo "\n" . print_r( self::$htdocs->data, 1 );
 	}
 	
-	// read in the content folder, and make the 
 	private static function read () {
 		self::$content = FileTree::read(Config::get("content"));
-		self::$htdocs = new ContentNode(self::$content->data);
+		self::$htdocs = new PathNode(self::$content->data);
+		// error_log(json_encode(self::$htdocs->headers));
+		
 		self::$htdocs->name = Config::get("output");
 	}
 	

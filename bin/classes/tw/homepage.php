@@ -6,15 +6,11 @@ class TW_HomePage extends TW_Base {
 	private static $static_homepage = false;
 	
 	protected static function finish ($node) {
-		$node->content = to_object(
-			self::$homepage ?
-			self::$homepage->content :
-			array(
-				'headers' => array('archive' => true),
-				'body' => self::$posts
-			)
+		$node->content = self::$homepage ? self::$homepage->content : array(
+			'headers' => array('archive' => true),
+			'body' => self::$posts
 		);
-		$node->content->headers->home = true;
+		$node->home = true;
 	}
 	
 	protected static function start ($node) {
@@ -36,7 +32,7 @@ class TW_HomePage extends TW_Base {
 			// this is a blog post, so save it.
 			$node->header("permalink") &&
 			$node->header("type") !== "static"
-		) self::$posts[] = $node->content;
+		) self::$posts[] = new ContentNode( $node->content );
 	}
 	
 	public static function walk ($node) { parent::walk($node); }

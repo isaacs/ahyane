@@ -6,8 +6,8 @@ class TW_Excerpt extends TW_Base {
 		self::$parser = new Markdown_Parser;
 	}
 	protected static function each ($node) {
-		$body = $node->content->body;
-		$node->content->excerpt = self::$parser->transform(trim(
+		$body = $node->body;
+		$node->excerpt = self::$parser->transform(trim(
 			(false !== strpos($body, '<!--more-->')) ?
 				strip_tags(array_shift(explode('<!--more-->', $body))) :
 				substr(strip_tags($body), 0, Config::get("excerptlength"))

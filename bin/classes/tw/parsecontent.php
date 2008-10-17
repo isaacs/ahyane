@@ -14,7 +14,7 @@ class TW_ParseContent extends TW_Base {
 		);
 	}
 	private static function getSlug ($node) {
-		return $node->header("slug", $node->slugify(self::getTitle($node)));
+		return $node->header("slug", slugify(self::getTitle($node)));
 	}
 	private static function getType ($node) {
 		return $node->header("type",
@@ -41,42 +41,29 @@ class TW_ParseContent extends TW_Base {
 		return $d + ( $offset[0] * 3600 + $offset[1] * 60 + $offset[2] );
 	}
 	
-	private static function getHeaders ($node) {
-		// get the slug
-		$node->content->headers->title = self::getTitle($node);
-		$node->content->headers->slug = self::getSlug($node);
-		
-		$node->content->headers->tags = self::getTags($node);
-		
-		$node->content->headers->date = self::getDate($node);
-		$node->content->headers->type = self::getType($node);
-		$node->content->headers->status = self::getStatus($node);
-		$node->content->headers->original = $node->path;
-		
-		$node->content->headers->modified = (
-			$filename = realpath(
-				AHYANE_BASEDIR . '/content' . $node->content->headers->original
-			)
-		) ? filemtime($filename) : 0;
-		if (
-			$node->content->headers->modified > @Config::get("LastModified")
-		) Config::set("LastModified", $node->content->headers->modified);
+	private static function setHeaders ($node) {
+		$node->setHeader(array(
+			'title' => self::getTitle($node),
+			'slug' => self::getSlug($node),
+			'tags' => self::getTags($node),
+			'date' => self::getDate($node),
+			'type' => self::getType($node),
+			'status' => self::getStatus($node),
+			'original' => $node->path,
+			'author' => $node->header("author", Config::get("DefaultAuthor"))
+		));
 		
 		if (
-			!property_exists($node->content->headers, "author")
-		) $node->content->headers->author = Config::get("DefaultAuthor");
-		
-		return $node->content->headers;
+			$node->modified > @Config::get("LastModified")
+		) Config::set("LastModified", $node->modified);
 	}
 	
 	protected static function each ($node) {
-		$node->content = Parser::parse($node->content);
+		$node->content = Parser::parse($node->body);
 		
-		// while we're at it, get some handy stuff.
-		$node->content->headers = self::getHeaders($node);
-		
-		// error_log("Parsing walker: ". $node->path);
-		
+		// while we're at it, set some handy stuff.
+		self::setHeaders($node);
+				
 	}
 	public static function walk ($node) { parent::walk($node); }
 }
