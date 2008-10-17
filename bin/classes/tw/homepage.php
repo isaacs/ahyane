@@ -11,6 +11,7 @@ class TW_HomePage extends TW_Base {
 			'body' => self::$posts
 		);
 		$node->home = true;
+		$node->permalink = urlify('/');
 	}
 	
 	protected static function start ($node) {
