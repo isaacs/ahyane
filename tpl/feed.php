@@ -19,25 +19,25 @@
 	foreach ($node->body as $post) {
 		?>
 		<item>
-			<title><?php echo $post->headers->title ?></title>
-			<link><?php echo $post->headers->permalink ?></link>
+			<title><?php echo $post->title ?></title>
+			<link><?php echo $post->permalink ?></link>
 			<!-- <comments>TODO: DISQUS URL</comments> -->
 
-			<pubDate><?php echo date('r', $post->headers->date); ?></pubDate>
-			<dc:creator><?php echo $post->headers->author ?></dc:creator>
+			<pubDate><?php echo date('r', $post->date); ?></pubDate>
+			<dc:creator><?php echo $post->author ?></dc:creator>
 			
 			<?php
-			foreach ($post->headers->tags as $tag) {
+			foreach ($post->tags as $tag) {
 				?>
 				<category><![CDATA[<?php echo $tag ?>]]></category>
 				<?php
 			}
 			?>
 			
-			<guid isPermaLink="true"><?php echo $post->headers->permalink ?></guid>
+			<guid isPermaLink="true"><?php echo $post->permalink ?></guid>
 			<description><![CDATA[<?php echo $post->excerpt . '<a rel="bookmark" class="more" href="' .
-				$post->headers->permalink . '">' . sprintf(
-					Config::get("ReadMoreText"), $post->headers->title
+				$post->permalink . '">' . sprintf(
+					Config::get("ReadMoreText"), $post->title
 				) . '</a>';
 			?>]]></description>
 

@@ -19,7 +19,7 @@ class TW_Paginate extends TW_Base {
 		
 		$node->pagecount = $maxpages;
 		$node->body = null; // just so the data copy in the loop will be faster.
-		$node->headers->page = 1;
+		$node->page = 1;
 		
 		$previous = null;
 		for ($i = 1; $i <= $maxpages; $i ++) {
