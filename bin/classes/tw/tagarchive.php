@@ -71,7 +71,7 @@ class TW_TagArchive extends TW_Base {
 			!$node->tags || !is_array($node->tags)
 		) return;
 		foreach (
-			$node->header("tags") as $i => $tag
+			$node->tags as $i => $tag
 		) self::addToTag(self::getTag($tag, $node), $node, $i);
 	}
 	

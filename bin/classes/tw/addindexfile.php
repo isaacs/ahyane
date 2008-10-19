@@ -3,7 +3,7 @@
 class TW_AddIndexFile extends TW_Base {
 	protected static function each ($node) {
 		if (!$node->body) return;
-		$filename = 'index.' . ($node->header("feed") ? "x" : "ht") . "ml";
+		$filename = 'index.' . ($node->feed ? "x" : "ht") . "ml";
 		$node->child( new PathNode($filename) )->body = $node->body;
 		$node->body = null;
 	}

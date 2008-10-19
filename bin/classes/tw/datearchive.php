@@ -54,9 +54,9 @@ class TW_DateArchive extends TW_Base {
 	}
 	protected static function each ($node) {
 		if (
-			!$node->header("date") ||
-			!$node->header("permalink") ||
-			$node->header("type") === "static"
+			!$node->date ||
+			!$node->permalink ||
+			$node->type === "static"
 		) return;
 		// TODO: Remove this! Dates already unique-ifed in TW_Pool
 		// while (

@@ -34,7 +34,7 @@ class TW_ParseContent extends TW_Base {
 	}
 	
 	private static function getDate ($node) {
-		$d = strtotime($node->header("date"));
+		$d = strtotime($node->date);
 		if (!$d) return $d;
 		if (date("His", $d) !== '000000') return $d;
 		$offset = explode(":", date("H:i:s", strtotime(Config::get("DefaultTime"))));

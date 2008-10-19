@@ -13,7 +13,7 @@ class TW_LinkPosts extends TW_Base {
 	
 	protected static function linkTo ($post, $dir) {
 		return to_object(array(
-			"href" => $post->header("permalink"),
+			"href" => $post->permalink,
 			"title" => sprintf(Config::get($dir), $post->header("title", Config::get("DefaultTitle")))
 		));
 	}
@@ -25,10 +25,10 @@ class TW_LinkPosts extends TW_Base {
 	
 	protected static function each ($node) {
 		if (
-			$node->header("type") !== "blog" ||
-			!$node->header("permalink")
+			$node->type !== "blog" ||
+			!$node->permalink
 		) return;
-		self::$posts[$node->header("date")] = $node;
+		self::$posts[$node->date] = $node;
 	}
 	
 	public static function walk ($node) { parent::walk($node); }

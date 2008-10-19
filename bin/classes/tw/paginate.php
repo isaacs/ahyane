@@ -3,13 +3,13 @@
 class TW_Paginate extends TW_Base {
 	protected static function each ($node) {
 		if (
-			!$node->header("archive") ||
+			!$node->archive ||
 			!is_array($node->body)
 		) return;
 		
 		// paginated feeds is silly.
 		// just show the first page always.
-		if ( $node->header("feed") ) {
+		if ( $node->feed ) {
 			$node->body = array_slice($node->body, 0, Config::get("maxperpage"));
 			return;
 		}

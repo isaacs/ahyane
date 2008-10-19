@@ -10,7 +10,7 @@
 	
 	<title><?php
 	echo Config::get("sitename") . ' » ' . (
-		$node->header("home") ? Config::get("SiteDescription") : $node->header("title")
+		$node->home ? Config::get("SiteDescription") : $node->title
 	);
 	?></title>
 </head>

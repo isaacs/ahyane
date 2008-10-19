@@ -3,7 +3,7 @@
 class TW_ViewLayer extends TW_Base {
 	protected static function each ($node) {
 		if (
-			$node->header("viewlayerapplied") || 
+			$node->viewlayerapplied || 
 			!$node->body
 		) return;
 		$node->body = $node->template("index.php", true);

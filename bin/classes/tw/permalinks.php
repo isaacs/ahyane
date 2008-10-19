@@ -18,10 +18,10 @@ class TW_Permalinks extends TW_Base {
 	}
 	private static function getPermalink ($node) {
 		return (
-			$node->header("status") === "draft" ?
+			$node->status === "draft" ?
 				"/drafts/" : ""
 		) . (
-			$node->header("type") === "blog" ?
+			$node->type === "blog" ?
 				self::getBlogPermalink($node) :
 				$node->slug
 		);

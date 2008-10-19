@@ -1,8 +1,8 @@
-<div class="post" id="<?php echo $node->header("slug") ?>">
+<div class="post" id="<?php echo $node->slug ?>">
 	<div class="hd">
 		<?php
 		$tags = array();
-		foreach ($node->header("tags") as $path => $tag) {
+		foreach ($node->tags as $path => $tag) {
 			$tags[] = '<a rel="tag" href="' . urlify($path) . '">' .
 				$tag . '</a>';
 		}
@@ -11,16 +11,16 @@
 		}
 		
 		// now the title of the post or page or whatever.
-		echo '<h2>' . $node->header("title") . '</h2>';
+		echo '<h2>' . $node->title . '</h2>';
 		
 		echo '<ul class="meta">' .
-			( $node->header("date")
+			( $node->date
 				? '<li class="published"><span name="value" style="display:none">' .
-					$node->header("date") . '</span>' .
-					date('r', $node->header("date")) . '</li>'
+					$node->date . '</span>' .
+					date('r', $node->date) . '</li>'
 				: ''
 			) .
-			'<li class="author">By ' . $node->header("author") . '</li>' . 
+			'<li class="author">By ' . $node->author . '</li>' . 
 			'</ul>';
 		?>
 	</div>

@@ -1,6 +1,6 @@
 <div class="archive" id="archive<?php echo str_replace('/', '-', $node->path) ?>">
 	<div class="hd">
-		<h2><?php echo $node->header("title"); ?></h2>
+		<h2><?php echo $node->title; ?></h2>
 	</div>
 	<div class="bd">
 		<?php

@@ -1,6 +1,6 @@
 <?php
 
-if ($node->header("feed")) {
+if ($node->feed) {
 	$node->template('feed.php');
 	return;
 }

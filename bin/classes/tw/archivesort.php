@@ -3,7 +3,7 @@
 class TW_ArchiveSort extends TW_Base {
 	protected static function each ($node) {
 		if (
-			!$node->header("archive") ||
+			!$node->archive ||
 			!is_array($node->body)
 		) return;
 		$posts = array();
@@ -11,7 +11,7 @@ class TW_ArchiveSort extends TW_Base {
 			if (!$post->date) $post->date = 0;
 			while (
 				array_key_exists($post->date, $posts)
-			// ) $post->setHeader("date", $post->header("date") + 1);
+			// ) $post->setHeader("date", $post->date + 1);
 			) $post->date ++;
 			
 			$posts[ $post->date ] = $post;

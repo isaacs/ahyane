@@ -27,12 +27,12 @@ class TW_HomePage extends TW_Base {
 			// looking for a static homepage, and this is it.
 			self::$static_homepage &&
 			$node->name === self::$static_homepage &&
-			$node->header("type") === "static"
+			$node->type === "static"
 		) self::$homepage = $node;
 		elseif (
 			// this is a blog post, so save it.
-			$node->header("permalink") &&
-			$node->header("type") !== "static"
+			$node->permalink &&
+			$node->type !== "static"
 		) self::$posts[] = new ContentNode( $node->content );
 	}
 	
