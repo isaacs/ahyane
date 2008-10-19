@@ -25,7 +25,7 @@ class TW_Paginate extends TW_Base {
 		for ($i = 1; $i <= $maxpages; $i ++) {
 			$p = $node->__(Config::get("pageprefix") . $i, true);
 			
-			$p->setHeader($node->content->headers);
+			$p->setHeader($node->headers);
 			$p->page = $i;
 			
 			$p->body = array_slice(

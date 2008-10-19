@@ -25,7 +25,7 @@
 		?>
 	</div>
 	<div class="bd">
-		<?php echo $node->content->body; ?>
+		<?php echo $node->body; ?>
 	</div>
 	<?php
 	$node->template("nav.php");
