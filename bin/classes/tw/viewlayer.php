@@ -6,7 +6,7 @@ class TW_ViewLayer extends TW_Base {
 			$node->viewlayerapplied || 
 			!$node->body
 		) return;
-		$node->body = $node->template("index.php", true);
+		$node->body = $node->template("index.php", null, true);
 		$node->viewlayerapplied = true;
 	}
 	public static function walk ($node) { parent::walk($node); }

@@ -65,18 +65,18 @@ class ContentNode {
 		return $this->header($key);
 	}
 	
-	public function template ($tpl, $buffer = false) {
+	public function template ($tpl, $args___ = null, $buffer___ = false) {
 		$node = $this;
-		if ($buffer) ob_start();
+		if ($args___) extract($args___, EXTR_SKIP);
+		if ($buffer___) ob_start();
 		require(Config::get("template") . "/$tpl");
-		if ($buffer) return ob_get_clean();
+		if ($buffer___) return ob_get_clean();
 	}
 
 	public function header ($header, $else = null) {
-		if (!$this->headers) {
-			error_log("no headers! " . $this->json);
-			die();
-		}
+		if (
+			!$this->headers
+		) die("no headers! " . $this->json());
 		return (
 			property_exists($this->headers, $header)
 		) ? $this->headers->$header : $else;
