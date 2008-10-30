@@ -21,7 +21,7 @@ function ahyane_autoloader ($class) {
 	if ($filename && include_once($filename)) {
 		return true;
 	} else {
-		trigger_error('Could not load Class [' . $class . '] from ' . $filename);
+		trigger_error('Could not load Class [' . $class . '] from ' . $filename, E_USER_ERROR);
 		return false;
 	}	
 }
@@ -29,7 +29,7 @@ function ahyane_autoloader ($class) {
 spl_autoload_register('ahyane_autoloader');
 
 function to_object ($x) {
-	return (is_object($x) || is_array($x)) ? (object)json_decode(json_encode($x)) : (object) $x;
+	return (object) ((is_object($x) || is_array($x)) ? json_decode(json_encode($x)) : $x);
 }
 
 function urlify ($url) {
