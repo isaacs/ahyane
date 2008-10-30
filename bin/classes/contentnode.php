@@ -29,40 +29,28 @@ class ContentNode {
 		return $this->set($key, $val);
 	}
 	protected function set ($key, $val) {
-		// if (is_string($key) && is_string($val)) {
-		// 	error_log("set $key $val");
-		// } else {
-		// 	error_log("problem? $key = ".json_encode($key)." val=".json_encode($val));
-		// }
-		
-		//
-		if (
+		return (
 			in_array($key, self::$pseudoMembers)
-		) return $this->$key($val);
-		
-		if (
+		) ? $this->$key($val)
+		: (
 			in_array($key, self::$realMembers)
-		) return $this->$key = $val;
-		
-		if (
+		) ? $this->$key = $val
+		: (
 			$key === "headers"
-		) return $this->setHeader($val);
-		
-		return $this->setHeader($key, $val);
+		) ? $this->setHeader($val)
+		: $this->setHeader($key, $val);
 	}
 	public function __get ($key) {
 		return $this->get($key);
 	}
 	protected function get ($key) {
-		if (
+		return (
 			in_array($key, self::$pseudoMembers)
-		) return $this->$key();
-		
-		if (
+		) ? $this->$key()
+		: (
 			$key === "headers"
-		) return to_object($this->headers);
-		
-		return $this->header($key);
+		) ? to_object($this->headers)
+		: $this->header($key);
 	}
 	
 	public function template ($tpl, $args___ = null, $buffer___ = false) {
@@ -83,10 +71,10 @@ class ContentNode {
 	}
 	
 	protected function json ($json = "") {
-		if (
+		return (
 			$json = json_decode($json)
-		) return json_encode($this->data($json));
-		return json_encode($this->data());
+		) ? json_encode($this->data($json))
+		: json_encode($this->data());
 	}
 	protected function data ($data = null) {
 		$data = (object)$data;
