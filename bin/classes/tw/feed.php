@@ -8,7 +8,7 @@ class TW_Feed extends TW_Base {
 			$node->archive !== true
 		) return;
 		$newnode = $node->_(Config::get("feedslug"), true);
-		$newnode->content = $node->content;
+		$newnode->body = $node->body;
 		$newnode->feed = true;
 	}
 	

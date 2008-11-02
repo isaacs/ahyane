@@ -37,7 +37,9 @@ class TW_Paginate extends TW_Base {
 		}
 		
 		// now make the root node === page-1
-		$node->content = $node->__(Config::get("pageprefix") . 1)->content;
+		$node->body = $node->__(Config::get("pageprefix") . 1)->body;
+		$node->setHeader($node->__(Config::get("pageprefix") . 1)->headers);
+		$node->excerpt = $node->__(Config::get("pageprefix") . 1)->excerpt;
 	}
 	
 	protected static function link ($next, $previous) {
