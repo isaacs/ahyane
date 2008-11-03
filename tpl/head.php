@@ -1,11 +1,13 @@
-<div id="hd">
-	<h1><a href="<?php
-		echo Config::get("SiteURL");
-	?>" rel="home"><?php
-		echo Config::get("SiteName");
-	?></a></h1>
-	<p><?php echo Config::get("SiteDescription"); ?></p>
-	<?php
-	$node->template("nav.php");
-	?>
+<div id="header">
+	<div id="headerimg" onclick="location.href='http://isaacschlueter.wordpress.com';" style="cursor: pointer;">
+		<h1><a href="http://isaacschlueter.wordpress.com/">Site Title</a></h1>
+		<div class="description">Site Tagline</div>
+	</div>
+</div>
+
+TODO: update the CSS so these look the same.
+
+<div id="header">
+	<h1><a href="${SiteURL}" rel="home">${SiteName}</a></h1>
+	<p>${SiteDescription}</p>
 </div>

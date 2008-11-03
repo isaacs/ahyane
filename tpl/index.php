@@ -1,13 +1,11 @@
 <?php
 
-if ($node->feed) {
-	$node->template('feed.php');
-	return;
+if (
+	$node->feed
+)	$node->template('feed.php');
+else {
+	$node->template('htmlhead.php');
+	$node->template('htmlbody.php');
 }
-
-$node->template('htmlhead.php');
-
-$node->template('htmlbody.php');
-
 
 

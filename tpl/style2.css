@@ -1,0 +1,25 @@
+#debug {
+	text-align:left;
+}
+code {
+	white-space: pre;
+}
+html {
+	margin:0;
+	background:#fff url(./images/butterfly.png) top right no-repeat fixed;
+}
+#yui-main .yui-b {
+	overflow:hidden;
+}
+#yui-main .yui-b img {
+	max-width:100%;
+	height:auto;
+}
+body {
+	margin:0;
+	padding:10px 0;
+	background:transparent url(./images/mask.png) repeat;
+}
+#doc {
+	width:950px;
+}

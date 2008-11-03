@@ -72,7 +72,7 @@ YearArchiveTitle: Yearly Archives: %s
 YearArchiveTitleDatePart: Y
 MonthArchiveTitle: Monthly Archives: %s 
 MonthArchiveTitleDatePart: F Y
-DayArchiveTitle: Daily Archives: 
+DayArchiveTitle: Daily Archives: %s
 DayArchiveTitleDatePart: F dS, Y
 
 TagArchiveTitle: Tag Archives: %s
