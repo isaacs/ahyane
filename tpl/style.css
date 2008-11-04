@@ -33,9 +33,11 @@ body {
 	background-color: white;
 	text-align: left;
 	
-	background:transparent url(images/kubrickbg.gif) repeat-y scroll center top;
+	background:transparent url(images/kubrickbg.gif) repeat-y scroll center;
 	}
-
+.widebody #page {
+	background:url(images/kubrickbgwide.gif) repeat-y scroll center;
+}
 #header {
 	background: #73a0c5 url('images/kubrickheader.jpg') no-repeat bottom center;
 	}
