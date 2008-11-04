@@ -1,4 +1,6 @@
-<body>
+<body class="<?php
+	echo $node->permalink ? 'widebody' : 'narrowbody';
+?>">
 <div id="page">
 <?php
 
