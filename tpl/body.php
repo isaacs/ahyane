@@ -15,7 +15,6 @@ if (
 } else {
 	$node->template("archive.php");
 	echo '</div>';
-	$node->template("nav.php");
 	$node->template("sidebar.php");
 }
 
