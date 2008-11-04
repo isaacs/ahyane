@@ -29,28 +29,28 @@ class ContentNode {
 		return $this->set($key, $val);
 	}
 	protected function set ($key, $val) {
-		return (
+		if (
 			in_array($key, self::$pseudoMembers)
-		) ? $this->$key($val)
-		: (
+		) return $this->$key($val);
+		if (
 			in_array($key, self::$realMembers)
-		) ? $this->$key = $val
-		: (
+		) return $this->$key = $val;
+		if (
 			$key === "headers"
-		) ? $this->setHeader($val)
-		: $this->setHeader($key, $val);
+		) return $this->setHeader($val);
+		return $this->setHeader($key, $val);
 	}
 	public function __get ($key) {
 		return $this->get($key);
 	}
 	protected function get ($key) {
-		return (
+		if (
 			in_array($key, self::$pseudoMembers)
-		) ? $this->$key()
-		: (
+		) return $this->$key();
+		if (
 			$key === "headers"
-		) ? to_object($this->headers)
-		: $this->header($key);
+		) return to_object($this->headers);
+		return $this->header($key);
 	}
 	
 	public function template ($tpl, $args___ = null, $buffer___ = false) {

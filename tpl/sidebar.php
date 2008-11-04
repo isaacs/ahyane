@@ -15,26 +15,24 @@
 		<li>
 			<p>
 				<?php
-				echo
-					(
-						$node->archivetype === 'tag'
-					) ? 'You are currently browsing the archives for the ' . $node->tag . ' category.'
-					: (
-						$node->archivetype === 'day'
-					) ? 'You are currently browsing the <a href="${SiteURL}">${SiteName}</a> blog archives
-						for the day ' . date(Config::get('DayArchiveTitleDatePart'), $node->archivestart) . '.'
-					: (
-						$node->archivetype === 'month'
-					) ? 'You are currently browsing the <a href="${SiteURL}">${SiteName}</a> blog archives
-						for ' . date(Config::get('MonthArchiveTitleDatePart'), $node->archivestart) . '.'
-					: (
-						$node->archivetype === 'year'
-					) ? 'You are currently browsing the <a href="${SiteURL}">${SiteName}</a> blog archives
-						for ' . date(Config::get('YearArchiveTitleDatePart'), $node->archivestart) . '.'
-					: (
-						$node->page && $node->page > 1
-					) ? 'You are currently browsing the <a href="${SiteURL}">${SiteName}</a> archives.'
-					: '';
+				if (
+					$node->archivetype === 'tag'
+				) echo 'You are currently browsing the archives for the ' . $node->tag . ' category.';
+				elseif (
+					$node->archivetype === 'day'
+				) echo 'You are currently browsing the <a href="${SiteURL}">${SiteName}</a> blog archives
+					for the day ' . date(Config::get('DayArchiveTitleDatePart'), $node->archivestart) . '.';
+				elseif (
+					$node->archivetype === 'month'
+				) echo 'You are currently browsing the <a href="${SiteURL}">${SiteName}</a> blog archives
+					for ' . date(Config::get('MonthArchiveTitleDatePart'), $node->archivestart) . '.';
+				elseif (
+					$node->archivetype === 'year'
+				) echo 'You are currently browsing the <a href="${SiteURL}">${SiteName}</a> blog archives
+					for ' . date(Config::get('YearArchiveTitleDatePart'), $node->archivestart) . '.';
+				elseif (
+					$node->page && $node->page > 1
+				) echo 'You are currently browsing the <a href="${SiteURL}">${SiteName}</a> archives.';
 				?>
 			</p>
 		</li>
