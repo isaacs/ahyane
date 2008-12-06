@@ -176,9 +176,11 @@ class PathNode extends ContentNode implements Countable {
 		return $parent;
 	}
 	
-	private function root () {
+	private static $root = null;
+	private function root ($cached = true) {
+		if ($cached && self::$root) return self::$root;
 		for ($r = $n = $this; $n = $n->parent(); $r = $n);
-		return $r;
+		return (self::$root = $r);
 	}
 	
 	private function path ($newpath = null) {
