@@ -8,12 +8,13 @@ class TW_Permalinks extends TW_Base {
 	private static $pages = array();
 	protected static function finish ($node) {
 		// iterate over all the pages to handle child pages.
-		foreach (self::$pages as $slug => $page) {
-			if (
-				$page->parentpage &&
-				array_key_exists($page->parentpage, self::$pages)
-			) self::$pages[$page->parentpage]->child($page);
-		}
+		foreach (
+			self::$pages as $slug => $page
+		) if (
+			$page->parentpage &&
+			array_key_exists($page->parentpage, self::$pages)
+		) self::$pages[$page->parentpage]->child($page);
+
 		self::$root = null;
 	}
 	
