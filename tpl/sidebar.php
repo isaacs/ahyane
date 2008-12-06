@@ -40,6 +40,11 @@
 			<h2>
 				Pages
 			</h2>
+			<?php
+			$pages = $node->getPages();
+			var_dump($pages);
+			
+			?>
 			<ul>
 				<!-- Loop through the static pages, hierarchically -->
 				<li class="page_item page-item-18">

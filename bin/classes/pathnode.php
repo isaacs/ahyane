@@ -183,6 +183,30 @@ class PathNode extends ContentNode implements Countable {
 		return (self::$root = $r);
 	}
 	
+	// template function to load up all the static page nodes.
+	private static $pages = null;
+	public function getPages () {
+		return (
+			self::$pages ?
+				self::$pages :
+				(self::$pages = $this->getPageStep($this->root()))
+		);
+	}
+	private function getPageStep ($root) {
+		$pages = array();
+		foreach (
+			$root->children as $child
+		) if (
+			$child->type === 'static'
+		) $pages[] = array(
+			$child->title,
+			$child->name,
+			$child->permalink,
+			$this->getPageStep($child)
+		);
+		return $pages;
+	}
+	
 	private function path ($newpath = null) {
 		if (
 			!is_string($newpath)
