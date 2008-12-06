@@ -5,7 +5,15 @@ class TW_Permalinks extends TW_Base {
 	protected static function start ($node) {
 		self::$root = $node;
 	}
+	private static $pages = array();
 	protected static function finish ($node) {
+		// iterate over all the pages to handle child pages.
+		foreach (self::$pages as $slug => $page) {
+			if (
+				$page->parentpage &&
+				array_key_exists($page->parentpage, self::$pages)
+			) self::$pages[$page->parentpage]->child($page);
+		}
 		self::$root = null;
 	}
 	
@@ -16,6 +24,10 @@ class TW_Permalinks extends TW_Base {
 		) $parts[$i] = date($part, $node->date);
 		return implode($node->slug, $parts);
 	}
+	private static function getStaticPermalink ($node) {
+		self::$pages[$node->slug] = $node;
+		return $node->slug;
+	}
 	private static function getPermalink ($node) {
 		return (
 			$node->status === "draft" ?
@@ -23,7 +35,7 @@ class TW_Permalinks extends TW_Base {
 		) . (
 			$node->type === "blog" ?
 				self::getBlogPermalink($node) :
-				$node->slug
+				self::getStaticPermalink($node)
 		);
 	}
 	
@@ -31,7 +43,7 @@ class TW_Permalinks extends TW_Base {
 		if (
 			!$node->body || $node === self::$root
 		) return;
-		$node->path = $node->path = self::getPermalink($node);
+		$node->path = self::getPermalink($node);
 		$node->permalink = $node->href;
 	}
 	

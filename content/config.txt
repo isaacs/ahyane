@@ -1,4 +1,5 @@
 title: Config
+parentpage: home
 
 Config variables are read from the following places:
 
