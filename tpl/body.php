@@ -1,21 +1,22 @@
-<div id="content" class="<?php
-	echo $node->permalink ? 'widecolumn' : 'narrowcolumn';
-?>">
-
-<h2 class="pagetitle"><?php echo $node->title; ?></h2>
-
 <?php
+
+$wide = ($node->permalink && $node->type === "blog");
+
+echo '<div id="content" class="' . 
+	($wide ? 'widecolumn' : 'narrowcolumn') . '">';
+
+echo '<h2 class="pagetitle">' . $node->title . '</h2>';
+
 $node->template("nav.php");
 
-if (
+$node->template(
 	$node->permalink
-) {
-	$node->template("permalink.php");
-	echo '</div>';
-} else {
-	$node->template("archive.php");
-	echo '</div>';
-	$node->template("sidebar.php");
-}
+	? "permalink.php"
+	: "archive.php"
+);
+echo '</div>';
+
+if (!$wide) $node->template("sidebar.php");
+
 
 
