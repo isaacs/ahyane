@@ -13,8 +13,11 @@ class TW_Permalinks extends TW_Base {
 		) if (
 			$page->parentpage &&
 			array_key_exists($page->parentpage, self::$pages)
-		) self::$pages[$page->parentpage]->child($page);
-
+		) {
+			self::$pages[$page->parentpage]->child($page);
+			$page->permalink = $page->href;
+		}
+		
 		self::$root = null;
 	}
 	

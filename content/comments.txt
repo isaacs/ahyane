@@ -1,5 +1,8 @@
 title: Commenting
 slug: comments
+type: static
+parentpage: todo
+sortorder: 2
 
 Write some JS that hits the disqus API.
 

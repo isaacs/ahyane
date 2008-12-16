@@ -1,5 +1,6 @@
 title: Config
-parentpage: home
+parentpage: todo
+sortorder: 1
 
 Config variables are read from the following places:
 

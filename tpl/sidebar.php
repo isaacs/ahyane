@@ -41,16 +41,8 @@
 				Pages
 			</h2>
 			<?php
-			$pages = $node->getPages();
-			var_dump($pages);
-			
+			$node->template('sidebar_pagelist.php', array("pages" => $node->getPages()));
 			?>
-			<ul>
-				<!-- Loop through the static pages, hierarchically -->
-				<li class="page_item page-item-18">
-					<a href="http://isaacschlueter.wordpress.com/a-test-page/" title="a test&nbsp;page">a test&nbsp;page</a>
-				</li>
-			</ul>
 		</li>
 		<li>
 			<h2>

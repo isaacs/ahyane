@@ -193,17 +193,24 @@ class PathNode extends ContentNode implements Countable {
 		);
 	}
 	private function getPageStep ($root) {
+		static $callback = null;
+		if (!$callback) $callback = create_function(
+			'$a,$b',
+			'return $a[1] > $b[1] ? 1 : -1;'
+		);
 		$pages = array();
 		foreach (
 			$root->children as $child
 		) if (
 			$child->type === 'static'
 		) $pages[] = array(
-			$child->title,
 			$child->name,
+			$child->header("sortorder", 0),
+			$child->title,
 			$child->permalink,
 			$this->getPageStep($child)
 		);
+		usort($pages, $callback);
 		return $pages;
 	}
 	
