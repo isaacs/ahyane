@@ -1,6 +1,6 @@
 <body class="<?php
 	echo $node->permalink ? 'widebody' : 'narrowbody';
-?>">
+?>" id="document<?php echo str_replace("/", '-', $node->path); ?>">
 <div id="page">
 <?php
 
