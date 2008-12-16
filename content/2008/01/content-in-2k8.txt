@@ -1,0 +1,4 @@
+date: 2008-01-02
+title: Content in 2008
+
+this is some content.  It occurs in 2008, but also in January and on the 2nd. It was a nice year.

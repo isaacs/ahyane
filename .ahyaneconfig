@@ -1,0 +1,87 @@
+# The default ahyane config file.  This follows the same syntax as the header section,
+# but an empty line doesn't mark the start of a "body" section.
+
+# This file, in the ahyane base folder, sets all the defaults that are used by
+# this installation of ahyane.  You should not edit this file directly. Instead,
+# change the settings by putting a .ahyaneconfig file in the input directory where
+# your content lives, to override just the bits you want to make different.
+
+# Also, you can override specific arguments at the command line via --foo=bar
+# or --foo="bar baz quux" for items with spaces in them.
+
+# Typically, your call to the ahyane builder will be something like this:
+# ahyane/bin/build.php --content=/Users/isaacs/blogs/foohack/
+# and then you'd put the configs for that blog inside of that content folder.
+
+# Path names are relative to the ahyane basedir, unless they start with a /, in which case,
+# they're absolute.
+
+# Lines that START with a # are comments.  But # doesn't comment out the rest of
+# a line like in sh or Apache configs.
+
+# folders
+content: content
+output: htdocs
+template: tpl
+
+# site stuff
+tagprefix: tag/
+# anything parseable by the php date() function, or %slug%
+Permalink: /Y/m/%slug%
+
+MaxPerPage: 5
+PagePrefix: page-
+
+ExcerptLength: 250
+
+# If there's a static page by this name, it'll use that as the default index page.
+# If not, or if it's missing, then it'll use the most recent blog posts.
+HomePage: home
+
+# usually "rss" or "feed" or something like that.
+FeedSlug: feed
+
+# the base url where the template will be accessible from.
+TemplateURL: /ahyane/tpl/
+
+SiteName: Ahyane
+SiteDescription: A CMS That Doesn't Suck
+# The url of the home page, also the URL prefix for any hrefs.
+SiteUrl: http://localhost/ahyane/htdocs/
+
+# If a post doesn't have an "author" header, it'll use this.
+DefaultAuthor: isaacs
+
+# Put "%d" for the page number, ie, "Go to Page %d"
+# (It's used in an sprintf call.)
+HigherPageText: « Older Posts
+LowerPageText: Newer Posts »
+
+# put "%s" for the post title, ie, "« %s (older)"
+OlderPostText: « %s
+NewerPostText: %s »
+
+DefaultTitle: [untitled]
+
+# Something that can be passed to the php date() function
+YearArchive: /Y/
+MonthArchive: /Y/m/
+DayArchive: /Y/m/d/
+
+YearArchiveTitle: Yearly Archives: %s 
+YearArchiveTitleDatePart: Y
+MonthArchiveTitle: Monthly Archives: %s 
+MonthArchiveTitleDatePart: F Y
+DayArchiveTitle: Daily Archives: %s
+DayArchiveTitleDatePart: F dS, Y
+
+TagArchiveTitle: Tag Archives: %s
+
+ReadMoreText: Read More…
+
+SiteLanguage: en
+
+# If specified, all posts with a time of midnight will be given this time instead.
+# For example, if you use just a date, but no time, you might want your post to show up
+# at 10:00 instead of midnight.
+DefaultTime: 10:00:00

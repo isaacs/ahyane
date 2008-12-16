@@ -1,0 +1,6 @@
+title: A Different Title
+category: testing
+date: 2007-01-01
+type: static
+
+the main test.
