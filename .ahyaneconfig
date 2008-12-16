@@ -45,7 +45,7 @@ FeedSlug: feed
 TemplateURL: /ahyane/tpl/
 
 SiteName: Ahyane
-SiteDescription: A CMS That Doesn't Suck
+SiteDescription: A blog engine that builds html from text files.
 # The url of the home page, also the URL prefix for any hrefs.
 SiteUrl: http://localhost/ahyane/htdocs/
 
