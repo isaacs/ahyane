@@ -13,9 +13,9 @@ $node->template("foot.php");
 
 ?></div>
 <?php
-echo "<div id=debug><pre>";
+echo "<!--\n";
 var_dump($node->headers);
-echo "</pre></div>";
+echo "\n-->";
 ?>
 </body>
 </html>

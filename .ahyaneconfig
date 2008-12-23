@@ -44,6 +44,9 @@ FeedSlug: feed
 # the base url where the template will be accessible from.
 TemplateURL: /ahyane/tpl/
 
+# the "shortname" for your site on Disqus.
+DisqusBoard: ahyane
+
 SiteName: Ahyane
 SiteDescription: A blog engine that builds html from text files.
 # The url of the home page, also the URL prefix for any hrefs.

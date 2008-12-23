@@ -56,6 +56,7 @@
 				Meta
 			</h2>
 			<ul>
+				<li><a href="http://${DisqusBoard}.disqus.com/" title="View the comments for this site">Comments on Disqus</a></li>
 				<li>
 					<a href="http://validator.w3.org/check/referer" title="This page validates as HTML 4.0 Strict">Valid <abbr title="HyperText Markup Language">HTML</abbr></a>
 				</li>
