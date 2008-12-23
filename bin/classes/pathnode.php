@@ -183,35 +183,28 @@ class PathNode extends ContentNode implements Countable {
 		return (self::$root = $r);
 	}
 	
-	// template function to load up all the static page nodes.
-	private static $pages = null;
-	public function getPages () {
-		return (
-			self::$pages ?
-				self::$pages :
-				(self::$pages = $this->getPageStep($this->root()))
-		);
+	// template function to load up all the blog archive nodes.
+	public function getArchives ($type) {
+		return TreeQuery::select(array(
+			"fields" => array(
+				"href", array("archivestart", 0), "tag", "postcount", 'slug'
+			),
+			"orderby" => array( "archivestart" => "desc", "slug" => "asc", "postcount" => "desc" ),
+			"where" => array("archivetype" => $type, "page" => 0)
+		), $this->root());
 	}
-	private function getPageStep ($root) {
-		static $callback = null;
-		if (!$callback) $callback = create_function(
-			'$a,$b',
-			'return $a[1] > $b[1] ? 1 : -1;'
-		);
-		$pages = array();
-		foreach (
-			$root->children as $child
-		) if (
-			$child->type === 'static'
-		) $pages[] = array(
-			$child->name,
-			$child->header("sortorder", 0),
-			$child->title,
-			$child->permalink,
-			$this->getPageStep($child)
-		);
-		usort($pages, $callback);
-		return $pages;
+	
+	// template function to load up all the static page nodes.
+	public function getPages () {
+		return TreeQuery::select(array(
+			"fields" => array("name", array("sortorder", 0), "title", "permalink"),
+			"orderby" => array("sortorder" => "asc", "title" => "asc"),
+			"where" => array(
+				"type" => "static",
+				"home" => array(false, false),
+				"in_pagelist" => array(true, true)
+			)
+		), $this->root());
 	}
 	
 	private function path ($newpath = null) {
