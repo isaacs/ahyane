@@ -1,5 +1,5 @@
 <?php
 $node->template("postbody.php");
 $node->template("nav.php");
-$node->template("comment.php");
+if (!$node->home) $node->template("comment.php");
 
