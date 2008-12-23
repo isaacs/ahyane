@@ -5,7 +5,9 @@ $wide = ($node->permalink && $node->type === "blog");
 echo '<div id="content" class="' . 
 	($wide ? 'widecolumn' : 'narrowcolumn') . '">';
 
-if (!$node->home) echo '<h2 class="pagetitle">' . $node->title . '</h2>';
+if (
+	!$node->home || $node->statichome
+) echo '<h2 class="pagetitle">' . $node->title . '</h2>';
 
 $node->template("nav.php");
 
