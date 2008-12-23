@@ -1,5 +1,3 @@
-<!-- Todo: cache pieces of this somehow?
-	Looping through pages, category, archives every time seems mega dumb. -->
 <div id="sidebar">
 	<ul>
 		<?php $node->template("sidebar_search.php"); ?>
@@ -8,7 +6,8 @@
 				<?php
 				if (
 					$node->archivetype === 'tag'
-				) echo 'You are currently browsing the archives for the ' . $node->tag . ' category.';
+				) echo 'You are currently browsing the  <a href="${SiteURL}">${SiteName}</a> 
+					archives for the ' . $node->tag . ' category.';
 				elseif (
 					$node->archivetype === 'day'
 				) echo 'You are currently browsing the <a href="${SiteURL}">${SiteName}</a> blog archives
