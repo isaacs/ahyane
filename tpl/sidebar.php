@@ -2,16 +2,7 @@
 	Looping through pages, category, archives every time seems mega dumb. -->
 <div id="sidebar">
 	<ul>
-		<!--
-			TODO: Search form!
-		<li>
-			<div>
-				<form id="searchform" name="searchform" method="get" action="/?s=">
-					<input type="text" id="livesearch" name="s" value="search this site">
-					<input type="submit" id="searchsubmit" style="display: none;" value="Search">
-				</form>
-			</div>
-		</li> -->
+		<?php $node->template("sidebar_search.php"); ?>
 		<li>
 			<p>
 				<?php
