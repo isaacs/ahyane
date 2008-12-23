@@ -1,9 +1,17 @@
 type: static
-title: Ahyane
+title: A Nifty Blog Platform for Nerds
 slug: home
 sortorder: -1
 
-Check us out <a href="http://github.com/isaacs/ahyane/tree/master">on github</a> or follow the progress <a href="http://twitter.com/ahyane">on twitter</a>.  More to come here later, hopefully.
+Ahyane started as a desire to simplify the process of writing to my blog.  I got sick of platforms that tried to do all things, and ended up being a huge memory/CPU hog for a very simple bit of HTML and text that I wanted to deliver.  I longed for a simpler time.
+
+In typical programmer fashion, this "simplification" turned into a quite consuming side project in its own right.
+
+There is no control panel.  There is no web back-office dashboard.  There's just a folder full of your content, a few config files, and a build script that will turn those text files into a website.  What this means is that the output is beyond Digg-proof.  This also means that it pays to be familiar with <a href="http://www.manpagez.com/man/1/rsync/">rsync</a> if you plan to use this program.
+
+Now that the features are pretty filled out, the next step is to work on some helper scripts and packaging options.  Also, documentation would be nice.  For now, you can <a href="http://github.com/isaacs/ahyane/tree/master">fork the code</a> if you'd like, or just clone/pull it directly.  Run <code>bin/build.php</code> on the command-line, and you'll get all kinds of output.  Check the <code>.ahyaneconfig</code> file to read about what has to be changed.
+
+If you'd like to keep up to date with the latest changes, follow <a href="http://twitter.com/ahyane">@ahyane</a>.
 
 <img src="${TemplateURL}/images/butterfly.png" height="800" width="800" alt="butterfly">
 
