@@ -11,6 +11,10 @@ There is no control panel.  There is no web back-office dashboard.  There's just
 
 Now that the features are pretty filled out, the next step is to work on some helper scripts and packaging options.  Also, documentation would be nice.  For now, you can <a href="http://github.com/isaacs/ahyane/tree/master">fork the code</a> if you'd like, or just clone/pull it directly.  Run <code>bin/build.php</code> on the command-line, and you'll get all kinds of output.  Check the <code>.ahyaneconfig</code> file to read about what has to be changed.
 
+<h3>Ahyane is not all things to all people</h3>
+
+Ahyane is just one thing, to me.  That one thing is "the blog platform I want".  If you want the same kind of blog platform, feel free to use this one.
+
 If you'd like to keep up to date with the latest changes, follow <a href="http://twitter.com/ahyane">@ahyane</a>.
 
 <img src="${TemplateURL}/images/butterfly.png" height="800" width="800" alt="butterfly">
