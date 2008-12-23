@@ -28,9 +28,6 @@ echo '<div class="' . $class . '" id="' . $node->slug . '">';
 		echo '</ul>';
 	}
 	echo 
-		"<$headertag>" .
-			'<a rel="bookmark" href="' . $node->permalink . '">' . $node->title . '</a>' .
-		"</$headertag>" .
 		'<div class="bd">' . 
 			$node->$show .
 			($showmore
