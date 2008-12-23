@@ -76,11 +76,14 @@ class TreeQuery {
 		$body = array('true');
 		foreach ($where as $field => $value) {
 			if (!is_array($value)) $value = array($value, null);
-			$body[] = "\$node->header(" . var_export($field, 1) . ", " . var_export($value[1], 1) .
-				") === " . var_export($value[0], 1);
+			list($field, $value, $default) = array(
+				var_export($field, 1), var_export($value[0], 1), var_export($value[1], 1)
+			);
+			$body[] = "\$node->header($field, $default) === $value";
 		}
-		$body = "return (" . implode("\n   && ", $body) . "\n);";
-		return (self::$WHERES[$key] = create_function('&$node', $body));
+		$body = implode(" && ", $body);
+		
+		return (self::$WHERES[$key] = create_function('&$node', "return ($body);"));
 	}
 	
 	private static $ORDERBYS = array();
