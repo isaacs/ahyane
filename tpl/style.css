@@ -22,7 +22,7 @@ Tags: blue, custom header, fixed width, two columns, widgets
 
 /* Begin Typography & Colors */
 body {
-	font-size: 62.5%; /* Resets 1em to 10px */
+	font-size: 10px; /* Resets 1em to 10px */
 	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
 	background: #d5d6d7 url('images/kubrickbgcolor.jpg');
 	color: #333;
@@ -298,7 +298,7 @@ body {
 
 #footer p {
 	margin: 0;
-	padding: 20px 0;
+	padding: 18px 0;
 	text-align: center;
 	}
 /* End Structure */
