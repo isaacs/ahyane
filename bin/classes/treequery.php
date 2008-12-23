@@ -105,16 +105,10 @@ class TreeQuery {
 		foreach ($orderby as $field => $dir) {
 			$comp = (trim(strtolower($dir)) === "asc") ? array(">", "<") : array("<", ">");
 			$field = var_export($field, 1);
-			$body[] = <<<BODY
-if (\$a[$field] {$comp[0]} \$b[$field]) return 1;
-BODY;
-			$body[] = <<<BODY
-if (\$a[$field] {$comp[1]} \$b[$field]) return -1;
-BODY;
-
+			$body[] = "if (\$a[$field] {$comp[0]} \$b[$field]) return 1;";
+			$body[] = "if (\$a[$field] {$comp[1]} \$b[$field]) return -1;";
 		}
 		$body = implode("\nelse", $body) . "\nelse return 0;";
-		// error_log($body);
 		return (self::$ORDERBYS[$key] = create_function(
 			'&$a,&$b', $body
 		));
