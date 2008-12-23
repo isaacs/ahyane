@@ -45,6 +45,7 @@ FeedSlug: feed
 TemplateURL: /ahyane/tpl/
 
 # the "shortname" for your site on Disqus.
+# If you want to have comments, sign up there.
 DisqusBoard: ahyane
 
 SiteName: Ahyane
