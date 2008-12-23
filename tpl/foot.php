@@ -6,4 +6,3 @@
 		<a href='http://ahyane.com/' rel='generator'>Built using Ahyane</a>
 		<br><a href="${SiteUrl}/feed/">Entries (RSS)</a>	</p>
 </div>
-</div>
