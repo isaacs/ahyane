@@ -16,6 +16,7 @@ class TW_ArchiveSort extends TW_Base {
 			
 			$posts[ $post->date ] = $post;
 		}
+		$node->postcount = count($posts);
 		if (krsort($posts, SORT_NUMERIC)) $node->body = $posts;
 	}
 	
