@@ -16,14 +16,11 @@
 			query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
 		}
 	}
-	
-	// document.getElementsByTagName('head')[0].appendChild((function () {
-	// 	var s = document.createElement('script');
-	// 	s.setAttribute("type", "text/javascript");
-	//   s.setAttribute("charset", "utf-8");
-	//   s.setAttribute("src", 'http://disqus.com/forums/ahyane/get_num_replies.js' + query);
-	// 	return s;
-	// })());
-			document.write('<script type="text/javascript" src="http://disqus.com/forums/ahyane/get_num_replies.js' + query + '"></' + 'script>');
+	var s = document.createElement('script');
+	s.setAttribute("type", "text/javascript");
+  s.setAttribute("charset", "utf-8");
+  s.setAttribute("src", 'http://disqus.com/forums/ahyane/get_num_replies.js' + query);
+	document.getElementsByTagName('head')[0].appendChild(s);
+			// document.write('<script type="text/javascript" src="http://disqus.com/forums/ahyane/get_num_replies.js' + query + '"></' + 'script>');
 })();
 </script>
