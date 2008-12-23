@@ -40,9 +40,15 @@ class TW_Paginate extends TW_Base {
 		$node->body = $node->__(Config::get("pageprefix") . 1)->body;
 		$node->setHeader($node->__(Config::get("pageprefix") . 1)->headers);
 		$node->excerpt = $node->__(Config::get("pageprefix") . 1)->excerpt;
+		
+		self::link($node, $node->__(Config::get("pageprefix") . 2));
+		
+		$node->page = 0;
 	}
 	
 	protected static function link ($next, $previous) {
+		if (!$next || !$previous) return;
+		
 		$next->previous = to_object(array(
 			"href" => $previous->href,
 			"title" => sprintf(Config::get("HigherPageText"), $previous->page)
