@@ -18,7 +18,7 @@ class TW_HomePage extends TW_Base {
 		self::$static_homepage = @Config::get("homepage", false);
 	}
 	
-	protected static function each ($node) {
+	protected static function each (&$node) {
 		if (
 			// found it already
 			self::$homepage
