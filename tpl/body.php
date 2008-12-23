@@ -5,14 +5,14 @@ $wide = ($node->permalink && $node->type === "blog");
 echo '<div id="content" class="' . 
 	($wide ? 'widecolumn' : 'narrowcolumn') . '">';
 
-echo '<h2 class="pagetitle">' . $node->title . '</h2>';
+if (!$node->home) echo '<h2 class="pagetitle">' . $node->title . '</h2>';
 
 $node->template("nav.php");
 
 $node->template(
-	$node->permalink
-	? "permalink.php"
-	: "archive.php"
+	$node->archive
+	? "archive.php"
+	: "permalink.php"
 );
 echo '</div>';
 
