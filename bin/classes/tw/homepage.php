@@ -11,6 +11,7 @@ class TW_HomePage extends TW_Base {
 			'body' => self::$posts
 		);
 		$node->home = true;
+		if (self::$homepage) self::$homepage->permalink = urlify("/");
 		$node->permalink = urlify('/');
 	}
 	
@@ -28,8 +29,10 @@ class TW_HomePage extends TW_Base {
 			self::$static_homepage &&
 			$node->name === self::$static_homepage &&
 			$node->type === "static"
-		) self::$homepage = $node;
-		elseif (
+		) {
+			self::$homepage = $node;
+			$node->statichome = true;
+		} elseif (
 			// this is a blog post, so save it.
 			$node->permalink &&
 			$node->type !== "static"
