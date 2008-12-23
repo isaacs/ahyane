@@ -65,19 +65,12 @@
 				Meta
 			</h2>
 			<ul>
-				<?php //wp_register(); ?>
-				<li>
-					<?php // wp_loginout(); ?>
-				</li>
 				<li>
 					<a href="http://validator.w3.org/check/referer" title="This page validates as HTML 4.0 Strict">Valid <abbr title="HyperText Markup Language">HTML</abbr></a>
 				</li>
-				<!-- <li>
-					<a href="http://gmpg.org/xfn/"><abbr title="XHTML Friends Network">XFN</abbr></a>
-				</li> -->
 				<li>
 					<a href="http://ahyane.com/" title="Powered by Ahyane, nifty publishing platform.">Ahyane</a>
-				</li><?php // wp_meta(); ?>
+				</li>
 			</ul>
 		</li>
 	</ul>
