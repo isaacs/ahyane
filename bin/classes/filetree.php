@@ -19,7 +19,7 @@ class FileTree {
 	}
 	
 	public static function read ($root) {
-		$path = realpath(AHYANE_BASEDIR . "/$root");
+		$path = realpath($root);
 		if (!$path) return;
 		
 		$d = new PathNode(basename($path));
@@ -40,8 +40,14 @@ class FileTree {
 		return $d;
 	}
 	public static function write ($tree, $root = "") {
-		$path = realpath(AHYANE_BASEDIR . "/$root");
+		$path = realpath($root);
 		if (!$path) return;
+		
+		if (! is_object($tree)) {
+			
+			echo json_encode($tree);
+			die();
+		}
 		
 		$path .= "/" . $tree->name;
 		$root .= "/" . $tree->name;

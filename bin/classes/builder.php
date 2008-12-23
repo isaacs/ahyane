@@ -157,6 +157,14 @@ class Builder {
 	
 	private static function read () {
 		self::$content = FileTree::read(Config::get("content"));
+		
+		if (
+			!self::$content
+		) self::$content = FileTree::read(
+			AHYANE_BASEDIR . "/" . Config::get('content')
+		);
+		
+		error_log(AHYANE_BASEDIR . "/" . Config::get("content"));
 		self::$htdocs = new PathNode(self::$content->data);
 		// error_log(json_encode(self::$htdocs->headers));
 		
@@ -170,6 +178,6 @@ class Builder {
 	}
 	
 	static function write () {
-		FileTree::write(self::$htdocs);
+		FileTree::write(self::$htdocs, AHYANE_BASEDIR . "/");
 	}
 }
