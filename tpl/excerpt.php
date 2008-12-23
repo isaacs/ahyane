@@ -20,7 +20,8 @@ echo '<div class="'. $class .
 	htmlspecialchars($node->title, ENT_QUOTES) .'">'. $node->title . '</a></h3>' .
 	'<small>' .date(Config::get('DayArchiveTitleDatePart'), $node->date) . '</small>' .
 	'<div class="entry">' . $node->body . '</div>' .
-	'<p class="postmetadata">Posted in ' . join(', ', $taglinks) . '</div>';
+	'<p class="postmetadata"><a href="' . $node->permalink . '#disqus_thread">View Comments</a> ' . 
+		'Posted in ' . join(', ', $taglinks) . '</div>';
 	// TODO: Put a comment link here to disqus?
 	// TODO: Should maybe be a meta.php template?
 	
