@@ -48,22 +48,17 @@
 			<h2>
 				Archives
 			</h2>
-			<ul>
-				<li>
-					<!-- loop through all the monthly archives. hmm.... -->
-					<a href='http://isaacschlueter.wordpress.com/2008/10/' title='October 2008'>October 2008</a>
-				</li>
-			</ul>
+			<?php
+			$node->template('sidebar_monthlies.php', array("monthlies" => $node->getArchives("month")));
+			?>
 		</li>
 		<li class="categories">
 			<h2>
 				Categories
 			</h2>
-			<ul>
-				<li class="cat-item cat-item-1">
-					<a href="http://isaacschlueter.wordpress.com/category/uncategorized/" title="View all posts filed under Uncategorized">Uncategorized</a> (6)
-				</li>
-			</ul>
+			<?php
+			$node->template('sidebar_tags.php', array('tags' => $node->getArchives("tag")));
+			?>
 		</li>
 		<li>
 			<h2>
