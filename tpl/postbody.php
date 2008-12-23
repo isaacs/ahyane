@@ -39,6 +39,7 @@ echo '<div class="' . $class . '" id="' . $node->slug . '">';
 				) . '</a>'
 				: ''
 			) .
+			'<a href="' . $node->permalink . '#disqus_thread">View Comments</a>' .
 		'</div>';
 		
 echo '</div>';
