@@ -189,7 +189,11 @@ class PathNode extends ContentNode implements Countable {
 			"fields" => array(
 				"href", array("archivestart", 0), "tag", "postcount", 'slug'
 			),
-			"orderby" => array( "archivestart" => "desc", "slug" => "asc", "postcount" => "desc" ),
+			"orderby" => array(
+				"archivestart" => "desc",
+				"slug" => "asc",
+				"postcount" => "desc" 
+			),
 			"where" => array("archivetype" => $type, "page" => 0)
 		), $this->root());
 	}
