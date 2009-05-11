@@ -16,12 +16,14 @@ class TW_HomePage extends TW_Base {
 				'body' => self::$posts
 			);
 			$node->content = self::$homepage->content;
-		} else {
-			$node->content = array(
-				'headers' => array('archive' => true),
-				'body' => self::$posts
-			);
-		}
+			$feed->name = $feed->title = $feed->slug = Config::get("feedslug");
+			$feed->feed = true;
+			$feed->type = "";
+			error_log(json_encode($feed->headers));
+		} else $node->content = array(
+			'headers' => array('archive' => true),
+			'body' => self::$posts
+		);
 		$node->home = true;
 		if (self::$homepage) self::$homepage->permalink = urlify("/");
 		$node->permalink = urlify('/');
