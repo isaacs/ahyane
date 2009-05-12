@@ -187,7 +187,7 @@ class PathNode extends ContentNode implements Countable {
 	public function getArchives ($type) {
 		return TreeQuery::select(array(
 			"fields" => array(
-				"href", array("archivestart", 0), "tag", "postcount", 'slug'
+				"href", array("archivestart", 0), "tag", array("postcount",1), 'slug'
 			),
 			"orderby" => array(
 				"archivestart" => "desc",

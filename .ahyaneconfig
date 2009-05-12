@@ -17,7 +17,7 @@
 # they're absolute.
 
 # Lines that START with a # are comments.  But # doesn't comment out the rest of
-# a line like in sh or Apache configs.
+# a line like in sh
 
 # folders
 content: content
