@@ -44,33 +44,39 @@ class FileTree {
 		if (!$path) return;
 		
 		if (! is_object($tree)) {
-			
+			trigger_error(
+				"Asking to write a tree that isn't a tree?", E_USER_WARNING
+			);
 			echo json_encode($tree);
 			die();
 		}
+		// $name = str_replace('%2F', '/', $tree->name);
+		$name = $tree->name;
 		
-		$path .= "/" . $tree->name;
-		$root .= "/" . $tree->name;
+		$path .= "/" . $name;
+		$root .= "/" . $name;
 		
-		if ($tree->length > 0) {
-			if (
-				$tree->body
-			) trigger_error("Warning: content in $tree is lost, because it has children", E_USER_WARNING);
-			
-			if (
-				is_file($path)
-			) unlink($path);
-			
-			if (
-				!is_dir($path)
-			) mkdir($path, 0755, true);
-			
-			foreach (
-				$tree->children as $child
-			) self::write($child, $root);
-			
-		} elseif ($tree->body) {
-			file_put_contents($path, $tree->body);
-		}
+		if ($tree->length <= 0 && !$tree->body) return;
+		
+		if (
+			$tree->body
+		) if (
+			$tree->length > 0
+		) trigger_error(
+			"Warning: content in $tree is lost, because it has children", E_USER_WARNING
+		);
+		else return file_put_contents($path, $tree->body);
+		
+		if (
+			is_file($path)
+		) unlink($path);
+		
+		if (
+			!is_dir($path)
+		) mkdir($path, 0755, true);
+		
+		foreach (
+			$tree->children as $child
+		) self::write($child, $root);
 	}
 }

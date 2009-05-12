@@ -41,8 +41,8 @@ function urlify ($url) {
 
 function slugify ($str) {
 	return preg_replace(
-		'~[^a-zA-Z0-9]+~', '-', str_replace(
-			array('%20', '%'), array(' ', ''), rawurlencode(strtolower(trim($str)))
+		'~[^a-zA-Z0-9_.\~\-!*\'\(\);:@&=+$/%\[\],]+~', '-', (
+			strtolower(trim($str))
 		)
 	);
 }

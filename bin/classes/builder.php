@@ -12,7 +12,7 @@ class Builder {
 		self::config();
 		
 		if (empty($argv)) {
-			$argv = array('full');
+			$argv = array('build');
 		}
 		if (is_string($argv)) {
 			$argv = array($argv);
@@ -63,12 +63,10 @@ class Builder {
 			)
 		) self::rm_recurse($file);
 	}
-	private static function full () {
+	private static function build () {
 		self::make(array(
-			'remove',
 			'read',
 			'parse',
-			// 'display',
 			'urlify',
 			'write'
 		));
