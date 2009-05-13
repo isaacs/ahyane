@@ -66,11 +66,14 @@ class Builder {
 	private static function build () {
 		self::make(array(
 			'read',
-			'parse',
-			'urlify',
+			'site',
 			'write'
 		));
 	}
+	private static function save () {
+		self::writeCache("htdocs");
+	}
+	
 	private static function config () {
 		
 		if (self::$config_done) return;
@@ -134,16 +137,20 @@ class Builder {
 		TW_ArchiveTitle::walk(self::$htdocs);
 	}
 	
-	private static function urlify () {
+	private static function site () {
 		TW_Markdown::walk(self::$htdocs);
 		TW_Excerpt::walk(self::$htdocs);
 		
 		self::make(array(
 			'pool',
 			'permalinks',
-			'archives'
+			'archives',
+			'template',
+			'save'
 		));
 		
+	}
+	private static function template () {
 		TW_ViewLayer::walk(self::$htdocs);
 		TW_ConfigTokens::walk(self::$htdocs);
 		TW_AddIndexFile::walk(self::$htdocs);
@@ -162,20 +169,36 @@ class Builder {
 			AHYANE_BASEDIR . "/" . Config::get('content')
 		);
 		
-		error_log(AHYANE_BASEDIR . "/" . Config::get("content"));
 		self::$htdocs = new PathNode(self::$content->data);
-		// error_log(json_encode(self::$htdocs->headers));
 		
 		self::$htdocs->name = Config::get("output");
+		
+		self::make(array('parse'));
 	}
 	
 	static function writeCache ($which = "") {
 		// write the file metadata to the cache
-		if ($which !== "htdocs") FileTree::writeCache(self::$content);
-		if ($which !== "cache") FileTree::writeCache(self::$htdocs);
+		if ($which !== "htdocs") FileTree::writeCache(
+			Config::get("output"), self::$htdocs
+		);
+		if ($which !== "content") FileTree::writeCache(
+			Config::get("content"), self::$content
+		);
+	}
+	static function readCache ($which = "") {
+		// write the file metadata to the cache
+		if ($which !== "htdocs") self::$content = FileTree::readCache(
+			Config::get("content")
+		);
+		if ($which !== "content") self::$htdocs = FileTree::readCache(
+			Config::get("output")
+		);
 	}
 	
+	
+	
 	static function write () {
+		if (!self::$htdocs) self::readCache("htdocs");
 		FileTree::write(self::$htdocs, AHYANE_BASEDIR . "/");
 	}
 }

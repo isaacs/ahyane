@@ -7,15 +7,16 @@ class FileTree {
 	
 	private function __construct () {}
 	
-	public static function readCache ($key = '') {
-		$file = dirname(__FILE__) . '/cache/cache-' . md5($key) . '.json';
+	public static function readCache ($name) {
+		$file = AHYANE_BASEDIR . '/bin/cache/cache-' . md5($key) . '.json';
 		$data = file_get_contents($file);
 		$data = substr($data, count(self::$unparseable));
 		return new ContentNode( json_decode($data) );
 	}
-	public static function writeCache ($tree) {
-		$file = dirname(__FILE__) . '/cache/cache-' . md5($tree->name) . '.json';
-		file_put_contents($file, self::$unparseable . $tree->json);
+	public static function writeCache ($name, $tree) {
+		$file = AHYANE_BASEDIR . '/bin/cache/cache-' . md5($name) . '.json';
+		$result = file_put_contents($file, self::$unparseable . $tree->json);
+		var_dump($result);
 	}
 	
 	public static function read ($root) {
